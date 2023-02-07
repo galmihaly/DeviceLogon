@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/circle.xml" value="0.2265" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/hungary_countryflag.xml" value="0.121" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/ic_brit.xml" value="0.2265" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/ic_hu2.xml" value="0.2265" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/language_button_background.xml" value="0.2265" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/retry_button_background.xml" value="0.2265" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main.xml" value="0.536" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

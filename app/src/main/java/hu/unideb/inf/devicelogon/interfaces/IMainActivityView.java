@@ -1,0 +1,4 @@
+package hu.unideb.inf.devicelogon.interfaces;
+
+public interface IMainActivityView {
+}
