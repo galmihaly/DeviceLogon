@@ -7,25 +7,22 @@ import android.os.Message;
 
 import java.lang.ref.WeakReference;
 
-import hu.unideb.inf.devicelogon.fragments.BaseFragment;
-import hu.unideb.inf.devicelogon.interfaces.IFragmentNavigationPresenter;
-import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
-import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
+import hu.unideb.inf.devicelogon.interfaces.IStartActivityPresenter;
 import hu.unideb.inf.devicelogon.logger.ApplicationLogger;
 import hu.unideb.inf.devicelogon.logger.LogLevel;
 import hu.unideb.inf.devicelogon.tasksmanager.CustomThreadPoolManager;
 import hu.unideb.inf.devicelogon.tasksmanager.PresenterThreadCallback;
 import hu.unideb.inf.devicelogon.tasksmanager.Util;
 
-public class MainActivityPresenter implements IMainActivityPresenter, PresenterThreadCallback, IFragmentNavigationPresenter {
+public class StartActivityPresenter implements IStartActivityPresenter, PresenterThreadCallback {
 
-    private IMainActivityView iMainActivityView;
+    private IStartActivityPresenter iStartActivityPresenter;
     private Context context;
     private CustomThreadPoolManager mCustomThreadPoolManager;
-    private MainActivityHandler mMainActivityHandler;
+    private StartActivityHandler mMainActivityHandler;
 
-    public MainActivityPresenter(IMainActivityView iMainActivityView, Context context) {
-        this.iMainActivityView = iMainActivityView;
+    public StartActivityPresenter(IStartActivityPresenter iStartActivityPresenter, Context context) {
+        this.iStartActivityPresenter = iStartActivityPresenter;
         this.context = context;
     }
 
@@ -34,7 +31,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
         try {
             ApplicationLogger.logging(LogLevel.INFORMATION, "A feladatkezelő létrehozása megkezdődött.");
 
-            mMainActivityHandler = new MainActivityHandler(Looper.myLooper(), this);
+            mMainActivityHandler = new StartActivityHandler(Looper.myLooper(), this);
             mCustomThreadPoolManager = CustomThreadPoolManager.getsInstance();
             mCustomThreadPoolManager.setPresenterCallback(this);
 
@@ -51,19 +48,14 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
         mMainActivityHandler.sendMessage(message);
     }
 
-    @Override
-    public void addFragment(BaseFragment baseFragment) {
-        iMainActivityView.loadOtherActivityFragment(baseFragment);
-    }
-
-    private static class MainActivityHandler extends Handler {
+    private static class StartActivityHandler extends Handler {
 
 
-        private WeakReference<IMainActivityPresenter> iMainActivityPresenterWeakReference;
+        private WeakReference<IStartActivityPresenter> iMainActivityPresenterWeakReference;
 
-        public MainActivityHandler(Looper looper, IMainActivityPresenter iMainActivityPresenter) {
+        public StartActivityHandler(Looper looper, IStartActivityPresenter iStartActivityPresenter) {
             super(looper);
-            this.iMainActivityPresenterWeakReference = new WeakReference<>(iMainActivityPresenter);
+            this.iMainActivityPresenterWeakReference = new WeakReference<>(iStartActivityPresenter);
         }
 
         // Ui-ra szánt üzenetet kezelejük itt
