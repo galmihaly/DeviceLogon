@@ -4,14 +4,17 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.widget.ImageButton;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.unideb.inf.devicelogon.fragments.BarcodeFragment;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
+import hu.unideb.inf.devicelogon.fragments.PinCodeFragment;
+import hu.unideb.inf.devicelogon.fragments.RFIDFragment;
+import hu.unideb.inf.devicelogon.fragments.UserAndPasswordFragment;
 import hu.unideb.inf.devicelogon.interfaces.IFragmentNavigationPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
@@ -69,7 +72,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
     }
 
     @Override
-    public void sendButtonsListToPresenter(ImageButton imageButton) {
+    public void sendButtonToPresenter(ImageButton imageButton) {
         iMainActivityView.setButtonToLayout(imageButton);
     }
 
@@ -100,12 +103,45 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
             super.handleMessage(msg);
 
             switch (msg.what){
-                case Util.BUTTONS_IS_CREATED:{
+                case Util.BUTTON_USER_PASS:{
 
                     if(msg.obj instanceof ImageButton){
                         ImageButton button = (ImageButton) msg.obj;
-                        iMainActivityPresenterWeakReference.get().sendButtonsListToPresenter(button);
+                        iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
+                        iMainActivityPresenterWeakReference.get().addFragment(new UserAndPasswordFragment());
                     }
+
+                    break;
+                }
+                case Util.BUTTON_BARCODE:{
+
+                    if(msg.obj instanceof ImageButton){
+                        ImageButton button = (ImageButton) msg.obj;
+                        iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
+                        iMainActivityPresenterWeakReference.get().addFragment(new BarcodeFragment());
+                    }
+
+                    break;
+                }
+                case Util.BUTTON_PINCODE:{
+
+                    if(msg.obj instanceof ImageButton){
+                        ImageButton button = (ImageButton) msg.obj;
+                        iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
+                        iMainActivityPresenterWeakReference.get().addFragment(new PinCodeFragment());
+                    }
+
+                    break;
+                }
+                case Util.BUTTON_RFID:{
+
+                    if(msg.obj instanceof ImageButton){
+                        ImageButton button = (ImageButton) msg.obj;
+                        iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
+                        iMainActivityPresenterWeakReference.get().addFragment(new RFIDFragment());
+                    }
+
+                    break;
                 }
             }
         }

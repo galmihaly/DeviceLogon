@@ -90,7 +90,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/email_background"
-                    android:drawableStart="@drawable/ic_baseline_vpn_key_24"
+                    android:drawableStart="@drawable/mini_barcode"
                     android:drawablePadding="20dp"
                     android:ems="10"
                     android:hint="vonalkód"

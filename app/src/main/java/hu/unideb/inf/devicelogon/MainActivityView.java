@@ -1,6 +1,7 @@
 package hu.unideb.inf.devicelogon;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
+import hu.unideb.inf.devicelogon.fragments.RFIDFragment;
 import hu.unideb.inf.devicelogon.fragments.UserAndPasswordFragment;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.presenters.MainActivityPresenter;
@@ -24,15 +26,19 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private ImageButton loginRFIDButton;
     private ImageButton loginBarcodeButton;
 
+    private ConstraintLayout loginModesCL;
+
+    private boolean isEmpty = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         llay = findViewById(R.id.cl);
+        loginModesCL = findViewById(R.id.loginModesCL);
+
         mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext());
         mainActivityPresenter.initTaskManager();
-
-        mainActivityPresenter.addFragment(new UserAndPasswordFragment());
 
         Intent intent = getIntent();
         int modesNumber = intent.getIntExtra("ModesNumber", -1);
@@ -51,10 +57,13 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
         baseFragment.atachPresenter(mainActivityPresenter);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.loginModesCL, baseFragment)
-                .commit();
+        if(isEmpty){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.loginModesCL, baseFragment)
+                    .commit();
+        }
+        isEmpty = false;
     }
 
     @Override

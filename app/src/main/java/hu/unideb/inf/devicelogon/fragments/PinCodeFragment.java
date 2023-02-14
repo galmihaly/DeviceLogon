@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import hu.unideb.inf.devicelogon.R;
 
-public class PinCodeFragment extends Fragment {
+public class PinCodeFragment extends BaseFragment {
 
     private View view;
 

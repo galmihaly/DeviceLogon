@@ -132,7 +132,7 @@ public class CreateLoginButtons implements Callable {
                         loginAccAndPassButton.setId(Util.BUTTON_USER_PASS);
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Felhasználónév és jelszó gomb létrehozásának befejezése!");
-                        message = Util.createMessage(Util.BUTTONS_IS_CREATED, "A szükséges gomb elkészült!");
+                        message = Util.createMessage(Util.BUTTON_USER_PASS, "A UserPassword gomb elkészült!");
                         message.obj = loginAccAndPassButton;
 
                         break;
@@ -152,7 +152,7 @@ public class CreateLoginButtons implements Callable {
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Pinkód gomb létrehozásának befejezése!");
-                        message = Util.createMessage(Util.BUTTONS_IS_CREATED, "A szükséges gomb elkészült!");
+                        message = Util.createMessage(Util.BUTTON_PINCODE, "A Pinkód gomb elkészült!");
                         message.obj = loginPinButton;
 
                         loginPinButton.setId(Util.BUTTON_PINCODE);
@@ -174,7 +174,7 @@ public class CreateLoginButtons implements Callable {
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "RFID gomb létrehozásának befejezése!");
-                        message = Util.createMessage(Util.BUTTONS_IS_CREATED, "A szükséges gomb elkészült!");
+                        message = Util.createMessage(Util.BUTTON_RFID, "Az RFID gomb elkészült!");
                         message.obj = loginRFIDButton;
 
                         loginRFIDButton.setId(Util.BUTTON_RFID);
@@ -196,7 +196,7 @@ public class CreateLoginButtons implements Callable {
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Barcode gomb létrehozásának befejezése!");
-                        message = Util.createMessage(Util.BUTTONS_IS_CREATED, "A szükséges gomb elkészült!");
+                        message = Util.createMessage(Util.BUTTON_BARCODE, "A Barcode gomb elkészült!");
                         message.obj = loginBarcodeButton;
 
                         loginBarcodeButton.setId(Util.BUTTON_BARCODE);

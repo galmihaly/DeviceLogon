@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import hu.unideb.inf.devicelogon.R;
 
 
-public class BarcodeFragment extends Fragment {
+public class BarcodeFragment extends BaseFragment {
 
     private View view;
 
