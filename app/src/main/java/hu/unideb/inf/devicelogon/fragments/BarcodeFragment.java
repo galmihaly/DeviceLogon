@@ -9,16 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hu.unideb.inf.devicelogon.R;
-import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 
-public class BarcodeFr extends BaseFragment {
+
+public class BarcodeFragment extends Fragment {
 
     private View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_barcode, container, false);
 
         return view;

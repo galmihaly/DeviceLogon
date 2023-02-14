@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
-import hu.unideb.inf.devicelogon.fragments.UserAndPasswordFr;
+import hu.unideb.inf.devicelogon.fragments.UserAndPasswordFragment;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.presenters.MainActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
@@ -35,7 +32,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext());
         mainActivityPresenter.initTaskManager();
 
-        mainActivityPresenter.addFragment(new UserAndPasswordFr());
+        mainActivityPresenter.addFragment(new UserAndPasswordFragment());
 
         Intent intent = getIntent();
         int modesNumber = intent.getIntExtra("ModesNumber", -1);
