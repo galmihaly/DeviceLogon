@@ -19,7 +19,7 @@
             android:name=".MainActivityView"
             android:exported="false" />
         <activity
-            android:name=".StartActivity"
+            android:name=".StartActivityView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

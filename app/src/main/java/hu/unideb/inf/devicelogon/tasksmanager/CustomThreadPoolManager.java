@@ -61,7 +61,6 @@ public class CustomThreadPoolManager {
             }
             mRunningTaskList.clear();
         }
-        sendResultToPresenter(Util.createMessage(Util.TASKS_CANCELLED, "Az összes feladat törölve lett a láncolt listából!"));
     }
 
     public void setPresenterCallback(PresenterThreadCallback presenterThreadCallback) {

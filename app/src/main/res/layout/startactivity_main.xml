@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartActivity">
+    tools:context=".StartActivityView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/programstartCL"
@@ -58,20 +58,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/notificatonTextBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Várakozás..."
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/retryButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-
             <Button
-                android:id="@+id/retryButton"
+                android:id="@+id/startButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
@@ -80,11 +68,22 @@
                 android:paddingTop="10dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="10dp"
-                android:text="retry"
+                android:text="SEND"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/modesNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/startButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

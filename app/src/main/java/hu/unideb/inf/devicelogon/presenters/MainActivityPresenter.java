@@ -4,8 +4,12 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
+import android.widget.ImageButton;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 import hu.unideb.inf.devicelogon.interfaces.IFragmentNavigationPresenter;
@@ -13,9 +17,10 @@ import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.logger.ApplicationLogger;
 import hu.unideb.inf.devicelogon.logger.LogLevel;
+import hu.unideb.inf.devicelogon.tasks.CreateLoginButtons;
 import hu.unideb.inf.devicelogon.tasksmanager.CustomThreadPoolManager;
 import hu.unideb.inf.devicelogon.tasksmanager.PresenterThreadCallback;
-import hu.unideb.inf.devicelogon.tasksmanager.Util;
+import hu.unideb.inf.devicelogon.utils.Util;
 
 public class MainActivityPresenter implements IMainActivityPresenter, PresenterThreadCallback, IFragmentNavigationPresenter {
 
@@ -23,6 +28,8 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
     private Context context;
     private CustomThreadPoolManager mCustomThreadPoolManager;
     private MainActivityHandler mMainActivityHandler;
+
+    private List<Integer> typesOfLoginButton = new ArrayList<>();
 
     public MainActivityPresenter(IMainActivityView iMainActivityView, Context context) {
         this.iMainActivityView = iMainActivityView;
@@ -43,6 +50,27 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
         catch (Exception e){
             ApplicationLogger.logging(LogLevel.FATAL, e.getMessage());
         }
+    }
+
+    @Override
+    public void initButtonsByLoginModesNumber(int modesNumber) {
+        try {
+            ApplicationLogger.logging(LogLevel.INFORMATION, "A bejelentkezési módok gombjainak létrehozása megkezdődött.");
+
+            CreateLoginButtons callable = new CreateLoginButtons(context.getApplicationContext(), modesNumber);
+            callable.setCustomThreadPoolManager(mCustomThreadPoolManager);
+            mCustomThreadPoolManager.addCallableMethod(callable);
+
+            ApplicationLogger.logging(LogLevel.INFORMATION, "A bejelentkezési módok gombjainak létrehozása befejeződött.");
+        }
+        catch (Exception e){
+            ApplicationLogger.logging(LogLevel.FATAL, e.getMessage());
+        }
+    }
+
+    @Override
+    public void sendButtonsListToPresenter(ImageButton imageButton) {
+        iMainActivityView.setButtonToLayout(imageButton);
     }
 
     @Override
@@ -72,26 +100,13 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
             super.handleMessage(msg);
 
             switch (msg.what){
-                case Util.PROGRAMSTART_FINISH_1:{
+                case Util.BUTTONS_IS_CREATED:{
 
-                    break;
+                    if(msg.obj instanceof ImageButton){
+                        ImageButton button = (ImageButton) msg.obj;
+                        iMainActivityPresenterWeakReference.get().sendButtonsListToPresenter(button);
+                    }
                 }
-                case Util.PROGRAMSTART_FINISH_2:{
-
-                    break;
-                }
-                case Util.PROGRAMSATRT_FINISH_3:{
-
-                    break;
-                }
-                case Util.ROOM_SEND_FAIL:{
-                    break;
-                }
-                case Util.ROOM_CREATE_FAIL:{
-                    break;
-                }
-                default:
-                    break;
             }
         }
     }
