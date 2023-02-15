@@ -3,23 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/button_background.xml" value="0.235" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/ic_barcode.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/ic_keyboard.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/ic_rajzt_bla_1.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/ic_rajzt_bla_5.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/ic_rajzt_bla_6.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/ic_rfid.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/mini_barcode.xml" value="0.196" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main.xml" value="0.27853260869565216" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main_landscape.xml" value="0.1591710758377425" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_barcode.xml" value="0.33" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_pin_code.xml" value="0.27853260869565216" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password.xml" value="0.5" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password_landscape.xml" value="0.27853260869565216" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/circle.xml" value="0.2265" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/hungary_countryflag.xml" value="0.121" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/ic_barcode.xml" value="0.235" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/ic_brit.xml" value="0.2265" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/ic_hu2.xml" value="0.2265" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/ic_rfid.xml" value="0.235" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/language_button_background.xml" value="0.2265" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/mini_barcode.xml" value="0.235" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/mini_rfid.xml" value="0.235" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/retry_button_background.xml" value="0.2265" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_barcode.xml" value="0.264" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_pin_code.xml" value="0.23958333333333334" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_rfid.xml" value="0.23958333333333334" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_user_and_password.xml" value="0.4" />
-        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/startactivity_main.xml" value="0.20652173913043478" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main.xml" value="0.536" />
       </map>
     </option>
   </component>

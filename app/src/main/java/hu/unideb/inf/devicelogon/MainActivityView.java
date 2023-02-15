@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
-import hu.unideb.inf.devicelogon.fragments.RFIDFragment;
-import hu.unideb.inf.devicelogon.fragments.UserAndPasswordFragment;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.presenters.MainActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
@@ -26,16 +29,34 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private ImageButton loginRFIDButton;
     private ImageButton loginBarcodeButton;
 
-    private ConstraintLayout loginModesCL;
+    private ConstraintLayout loginModesCL1;
+    private ConstraintLayout loginModesCL2;
 
     private boolean isEmpty = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        llay = findViewById(R.id.cl);
-        loginModesCL = findViewById(R.id.loginModesCL);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if(getSupportActionBar() != null) getSupportActionBar().hide();
+
+        int orientation = this.getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_PORTRAIT){
+            Log.e("", "dgdsfgdsg");
+            setContentView(R.layout.activity_main);
+            setTheme(R.style.DeviceLogon_portrait);
+            llay = findViewById(R.id.cl);
+            loginModesCL1 = findViewById(R.id.loginModesCL1);
+        }
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.e("", "bmnbmnmbnbnmbnbmnbmnmb");
+            setContentView(R.layout.activity_main_landscape);
+            setTheme(R.style.DeviceLogon_landscape);
+            llay = findViewById(R.id.cl2);
+            loginModesCL2 = findViewById(R.id.loginModesCL2);
+        }
+
+
 
         mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext());
         mainActivityPresenter.initTaskManager();
@@ -58,10 +79,18 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         baseFragment.atachPresenter(mainActivityPresenter);
 
         if(isEmpty){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.loginModesCL, baseFragment)
-                    .commit();
+            if(loginModesCL1 != null){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.loginModesCL1, baseFragment)
+                        .commit();
+            }
+            else if(loginModesCL2 != null){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.loginModesCL2, baseFragment)
+                        .commit();
+            }
         }
         isEmpty = false;
     }

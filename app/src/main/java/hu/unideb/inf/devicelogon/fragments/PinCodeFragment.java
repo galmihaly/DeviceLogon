@@ -14,6 +14,12 @@ public class PinCodeFragment extends BaseFragment {
 
     private View view;
 
+    public static PinCodeFragment newInstance(){
+
+        PinCodeFragment rfidFragment = new PinCodeFragment();
+        return rfidFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

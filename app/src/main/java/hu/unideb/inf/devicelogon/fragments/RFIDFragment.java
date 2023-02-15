@@ -12,6 +12,12 @@ public class RFIDFragment extends BaseFragment {
 
     private View view;
 
+    public static RFIDFragment newInstance(){
+
+        RFIDFragment rfidFragment = new RFIDFragment();
+        return rfidFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

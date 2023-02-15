@@ -2,6 +2,7 @@ package hu.unideb.inf.devicelogon.tasks;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -125,8 +126,8 @@ public class CreateLoginButtons implements Callable {
                                 R.drawable.circle_background,
                                 R.drawable.ic_personalcard,
                                 margins = new int[]{10, 10, 10, 10},
-                                width = 150,
-                                height = 150
+                                width = 100,
+                                height = 100
                         );
 
                         loginAccAndPassButton.setId(Util.BUTTON_USER_PASS);
@@ -147,8 +148,8 @@ public class CreateLoginButtons implements Callable {
                                 R.drawable.circle_background,
                                 R.drawable.ic_keyboard,
                                 margins = new int[]{10, 10, 10, 10},
-                                width = 150,
-                                height = 150
+                                width = 100,
+                                height = 100
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Pinkód gomb létrehozásának befejezése!");
@@ -169,8 +170,8 @@ public class CreateLoginButtons implements Callable {
                                 R.drawable.circle_background,
                                 R.drawable.ic_rfid,
                                 margins = new int[]{10, 10, 10, 10},
-                                width = 150,
-                                height = 150
+                                width = 100,
+                                height = 100
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "RFID gomb létrehozásának befejezése!");
@@ -191,8 +192,8 @@ public class CreateLoginButtons implements Callable {
                                 R.drawable.circle_background,
                                 R.drawable.ic_barcode,
                                 margins = new int[]{10, 10, 10, 10},
-                                width = 150,
-                                height = 150
+                                width = 100,
+                                height = 100
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Barcode gomb létrehozásának befejezése!");
