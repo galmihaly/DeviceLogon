@@ -7,7 +7,7 @@
     tools:context=".StartActivityView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/programstartCL"
+        android:id="@+id/programstartCL_portrait"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#404040"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/logoCL"
+            android:id="@+id/logoCL_portrait"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/logo_portrait"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -37,18 +37,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mainCL"
+            android:id="@+id/mainCL_portrait"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/languagesCL"
-            app:layout_constraintEnd_toEndOf="@+id/languagesCL"
+            app:layout_constraintBottom_toTopOf="@+id/CL_portrait"
+            app:layout_constraintEnd_toEndOf="@+id/CL_portrait"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/languagesCL"
-            app:layout_constraintTop_toBottomOf="@+id/logoCL"
+            app:layout_constraintStart_toStartOf="@+id/CL_portrait"
+            app:layout_constraintTop_toBottomOf="@+id/logoCL_portrait"
             app:layout_constraintVertical_bias="0.0">
 
             <Button
-                android:id="@+id/startButton"
+                android:id="@+id/startButton_portrait"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
@@ -64,12 +64,12 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/modesNumber"
+                android:id="@+id/modesNumber_portrait"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/startButton"
+                app:layout_constraintBottom_toTopOf="@+id/startButton_portrait"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,46 +77,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/languagesCL"
+            android:id="@+id/CL_portrait"
             android:layout_width="0dp"
             android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageButton
-                android:id="@+id/huLanguageButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="40dp"
-                android:background="@drawable/language_button_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_hu2" />
-
-            <ImageButton
-                android:id="@+id/germanyLanguageButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/language_button_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton4"
-                app:layout_constraintStart_toEndOf="@+id/huLanguageButton"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_brit" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="40dp"
-                android:background="@drawable/language_button_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_german" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

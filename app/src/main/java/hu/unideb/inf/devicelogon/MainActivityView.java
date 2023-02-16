@@ -6,13 +6,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import java.util.Objects;
 
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
@@ -42,15 +39,15 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
         int orientation = this.getResources().getConfiguration().orientation;
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
-            Log.e("", "dgdsfgdsg");
-            setContentView(R.layout.activity_main);
+
+            setContentView(R.layout.activity_main_mobile_portrait);
             setTheme(R.style.DeviceLogon_portrait);
             llay = findViewById(R.id.cl);
             loginModesCL1 = findViewById(R.id.loginModesCL1);
         }
         if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Log.e("", "bmnbmnmbnbnmbnbmnbmnmb");
-            setContentView(R.layout.activity_main_landscape);
+
+            setContentView(R.layout.activity_main_mobile_landscape);
             setTheme(R.style.DeviceLogon_landscape);
             llay = findViewById(R.id.cl2);
             loginModesCL2 = findViewById(R.id.loginModesCL2);

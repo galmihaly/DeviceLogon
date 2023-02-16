@@ -2,6 +2,9 @@ package hu.unideb.inf.devicelogon.utils;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.view.WindowManager;
+
+import hu.unideb.inf.devicelogon.StartActivityView;
 
 public class Util {
 
@@ -26,4 +29,6 @@ public class Util {
 
         return message;
     }
+
+
 }
