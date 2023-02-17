@@ -1,23 +1,23 @@
 package hu.unideb.inf.devicelogon;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.window.layout.WindowMetrics;
+import androidx.window.layout.WindowMetricsCalculator;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.interfaces.IStartActivityView;
 import hu.unideb.inf.devicelogon.presenters.StartActivityPresenter;
+import hu.unideb.inf.devicelogon.utils.Util;
 
 public class StartActivityView extends AppCompatActivity implements IStartActivityView {
 
@@ -29,6 +29,7 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
     private EditText modesNumberLs;
     private Button buttonLs;
 
+
     private StartActivityPresenter startActivityPresenter;
 
     @Override
@@ -38,20 +39,10 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
         hideNavigationBar();
         initView();
 
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        Log.e("display", displayMetrics.heightPixels + "x" + displayMetrics.widthPixels);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        double x = Math.pow(dm.widthPixels/dm.xdpi,2);
-        double y = Math.pow(dm.heightPixels/dm.ydpi,2);
-        double screenInches = Math.sqrt(x+y);
-        Log.d("debug","Screen inches : " + screenInches);
-        screenInches=  (double)Math.round(screenInches * 10) / 10;
-        Log.e("inches: {}", String.valueOf(screenInches));
-
         startActivityPresenter = new StartActivityPresenter(this, getApplicationContext());
         startActivityPresenter.initTaskManager();
+
+        Util.computeWindowSizeClasses(this);
 
         if(buttonPr != null) {
             buttonPr.setOnClickListener((view -> {
@@ -59,7 +50,23 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 try {
                     String inputString = modesNumberPr.getText().toString();
                     if(!inputString.equals("")){
-                        startActivityPresenter.createLoginActivityIntentByModesNumber(Integer.parseInt(modesNumberPr.getText().toString()));
+                        startActivityPresenter.createLoginActivityIntentByModesNumber(Integer.parseInt(inputString));
+                    }
+                }
+                catch (NumberFormatException e){
+                    e.printStackTrace();
+                }
+
+            }));
+        }
+
+        if(buttonLs != null) {
+            buttonLs.setOnClickListener((view -> {
+
+                try {
+                    String inputString = modesNumberLs.getText().toString();
+                    if(!inputString.equals("")){
+                        startActivityPresenter.createLoginActivityIntentByModesNumber(Integer.parseInt(inputString));
                     }
                 }
                 catch (NumberFormatException e){
@@ -70,7 +77,6 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
         }
     }
 
-
     @Override
     public void loadOtherActivityPages(Intent intent) {
         if(intent == null) return;
@@ -79,23 +85,38 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
 
     private void initView(){
 
-        int orientation = this.getResources().getConfiguration().orientation;
-        if(orientation == Configuration.ORIENTATION_PORTRAIT){
+        WindowSizeClass[] windowSizeClasses = Util.computeWindowSizeClasses(this);
 
-            setContentView(R.layout.startactivity_main_mobile_portrait);
+        if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+            int orientation = this.getResources().getConfiguration().orientation;
+
+            if(orientation == Configuration.ORIENTATION_PORTRAIT){
+
+                setContentView(R.layout.startactivity_main_mobile_portrait);
+                setTheme(R.style.DeviceLogon_portrait);
+
+                modesNumberPr = findViewById(R.id.modesNumber_mobile_portrait);
+                buttonPr = findViewById(R.id.startButton_mobile_portrait);
+            }
+            else if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+                Log.e("landscape", "la");
+
+                setContentView(R.layout.startactivity_main_mobile_landscape);
+                setTheme(R.style.DeviceLogon_landscape);
+
+                modesNumberLs = findViewById(R.id.modesNumber_landscape);
+                buttonLs = findViewById(R.id.startButton_landscape);
+            }
+        }
+        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+            setContentView(R.layout.startactivity_main_pda_portrait);
             setTheme(R.style.DeviceLogon_portrait);
 
-            modesNumberPr = findViewById(R.id.modesNumber_portrait);
-            buttonPr = findViewById(R.id.startButton_portrait);
+            modesNumberPr = findViewById(R.id.modesNumber_pda_portrait);
+            buttonPr = findViewById(R.id.startButton_pda_portrait);
         }
-        if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-            setContentView(R.layout.startactivity_main_mobile_landscape);
-            setTheme(R.style.DeviceLogon_landscape);
-
-            modesNumberLs = findViewById(R.id.modesNumber_landscape);
-            buttonPr = findViewById(R.id.startButton_landscape);
-        }
 
     }
 
@@ -120,4 +141,6 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
             }
         });
     }
+
+
 }

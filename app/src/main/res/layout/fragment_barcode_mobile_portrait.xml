@@ -4,25 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.PinCodeFragment">
+    tools:context=".fragments.mobilefragments.BarcodeFragmentMobile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pincodeCL"
+        android:id="@+id/barcodeCL"
         android:layout_width="match_parent"
         android:layout_height="400dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/buttonsLayout3"
+            android:id="@+id/buttonsLayout4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
 
             <Button
-                android:id="@+id/loginButton3"
+                android:id="@+id/loginButton4"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background"
@@ -35,23 +35,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/deleteButton3"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/button_background"
-                android:text="MÉGSEM"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/loginButton3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginStart="50dp"
@@ -62,7 +49,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout6"
+                android:id="@+id/constraintLayout8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:elevation="10dp"
@@ -72,28 +59,28 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="20dp"
-                    android:text="PIN"
+                    android:text="Vonalkód"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editTextPinCode"
+                    android:id="@+id/editTextBarcode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/email_background"
-                    android:drawableStart="@drawable/ic_baseline_vpn_key_24"
+                    android:drawableStart="@drawable/mini_barcode"
                     android:drawablePadding="20dp"
                     android:ems="10"
-                    android:hint="pinkód"
+                    android:hint="vonalkód"
                     android:inputType="textEmailAddress"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -102,7 +89,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

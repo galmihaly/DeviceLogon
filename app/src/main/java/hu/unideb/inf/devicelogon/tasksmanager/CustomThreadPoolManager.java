@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class CustomThreadPoolManager {
 
     private static final CustomThreadPoolManager sInstance;
-    private static int NUMBER_OF_CORES;
+    private static final int NUMBER_OF_CORES;
     private static final int KEEP_ALIVE_TIME = 1;
     private static final TimeUnit KEEP_ALIVE_TIME_UNIT;
 

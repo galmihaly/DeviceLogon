@@ -7,6 +7,7 @@
     tools:context=".MainActivityView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activityCL_pda_portrait"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
@@ -16,39 +17,38 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView3_mobile_portrait"
+            android:id="@+id/imageView3_pda_portrait"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_rajzt_bla_1" />
+            app:srcCompat="@drawable/logo2" />
 
         <TextView
-            android:id="@+id/textView_mobile_portrait"
+            android:id="@+id/textView_pda_portrait"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
             android:text="Bejelentkezés"
             android:textColor="@color/black"
             android:textSize="34sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3_mobile_portrait" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loginModesCL1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/loginModesButtonsCL_mobile_portrait"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_mobile_portrait">
+            app:layout_constraintTop_toBottomOf="@+id/imageView3_pda_portrait" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loginModesCL1_pda_portrait"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/loginModesButtonsCL_pda_portrait"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_pda_portrait">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loginModesButtonsCL_mobile_portrait"
+            android:id="@+id/loginModesButtonsCL_pda_portrait"
             android:layout_width="0dp"
             android:layout_height="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +56,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
-                android:id="@+id/cl_mobile_portrait"
+                android:id="@+id/cl_pda_portrait"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

@@ -10,11 +10,12 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import hu.unideb.inf.devicelogon.fragments.BarcodeFragment;
+import hu.unideb.inf.devicelogon.enums.FragmentTypes;
+import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
-import hu.unideb.inf.devicelogon.fragments.PinCodeFragment;
-import hu.unideb.inf.devicelogon.fragments.RFIDFragment;
-import hu.unideb.inf.devicelogon.fragments.UserAndPasswordFragment;
+import hu.unideb.inf.devicelogon.fragments.mobilefragments.RFIDFragmentMobile;
+import hu.unideb.inf.devicelogon.fragments.mobilefragments.UserPassFragmentMobile;
+import hu.unideb.inf.devicelogon.fragments.pdafragments.UserPassFragmentPDA;
 import hu.unideb.inf.devicelogon.interfaces.IFragmentNavigationPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
@@ -31,12 +32,14 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
     private Context context;
     private CustomThreadPoolManager mCustomThreadPoolManager;
     private MainActivityHandler mMainActivityHandler;
+    private WindowSizeClass[] windowSizeClasses;
 
     private List<Integer> typesOfLoginButton = new ArrayList<>();
 
-    public MainActivityPresenter(IMainActivityView iMainActivityView, Context context) {
+    public MainActivityPresenter(IMainActivityView iMainActivityView, Context context, WindowSizeClass[] windowSizeClasses) {
         this.iMainActivityView = iMainActivityView;
         this.context = context;
+        this.windowSizeClasses = windowSizeClasses;
     }
 
     @Override
@@ -83,12 +86,38 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
     }
 
     @Override
+    public void addFragmentByEnum(FragmentTypes fragmentTypes) {
+
+        switch (fragmentTypes){
+            case USERPASSFRAGMENT:{
+                if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+                    iMainActivityView.loadOtherActivityFragment(new UserPassFragmentMobile());
+                }
+                else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+                    iMainActivityView.loadOtherActivityFragment(new UserPassFragmentPDA());
+                }
+
+                break;
+            }
+            case RFIDFRAGMENT:{
+                if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+                    iMainActivityView.loadOtherActivityFragment(new RFIDFragmentMobile());
+                }
+                else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+                    iMainActivityView.loadOtherActivityFragment(new UserPassFragmentPDA());
+                }
+
+                break;
+            }
+        }
+    }
+
+    @Override
     public void addFragment(BaseFragment baseFragment) {
         iMainActivityView.loadOtherActivityFragment(baseFragment);
     }
 
     private static class MainActivityHandler extends Handler {
-
 
         private WeakReference<IMainActivityPresenter> iMainActivityPresenterWeakReference;
 
@@ -108,7 +137,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
                     if(msg.obj instanceof ImageButton){
                         ImageButton button = (ImageButton) msg.obj;
                         iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
-                        iMainActivityPresenterWeakReference.get().addFragment(new UserAndPasswordFragment());
+                        iMainActivityPresenterWeakReference.get().addFragmentByEnum(FragmentTypes.USERPASSFRAGMENT);
                     }
 
                     break;
@@ -118,7 +147,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
                     if(msg.obj instanceof ImageButton){
                         ImageButton button = (ImageButton) msg.obj;
                         iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
-                        iMainActivityPresenterWeakReference.get().addFragment(new BarcodeFragment());
+                        iMainActivityPresenterWeakReference.get().addFragmentByEnum(FragmentTypes.BARCODEFRAGMENT);
                     }
 
                     break;
@@ -128,7 +157,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
                     if(msg.obj instanceof ImageButton){
                         ImageButton button = (ImageButton) msg.obj;
                         iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
-                        iMainActivityPresenterWeakReference.get().addFragment(new PinCodeFragment());
+                        iMainActivityPresenterWeakReference.get().addFragmentByEnum(FragmentTypes.PINCODEFRAGMENT);
                     }
 
                     break;
@@ -138,7 +167,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
                     if(msg.obj instanceof ImageButton){
                         ImageButton button = (ImageButton) msg.obj;
                         iMainActivityPresenterWeakReference.get().sendButtonToPresenter(button);
-                        iMainActivityPresenterWeakReference.get().addFragment(new RFIDFragment());
+                        iMainActivityPresenterWeakReference.get().addFragmentByEnum(FragmentTypes.RFIDFRAGMENT);
                     }
 
                     break;

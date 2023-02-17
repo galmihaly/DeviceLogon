@@ -4,10 +4,7 @@
         <rotate android:pivotX="50%"
             android:pivotY="50%">
             <shape>
-                <stroke android:width="3dp"
-                    android:color="#000000" >
 
-                </stroke>
                 <corners android:radius="60dp"/>
                 <gradient
                     android:angle="180"

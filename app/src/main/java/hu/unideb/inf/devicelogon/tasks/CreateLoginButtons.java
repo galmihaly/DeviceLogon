@@ -130,10 +130,9 @@ public class CreateLoginButtons implements Callable {
                                 height = 100
                         );
 
-                        loginAccAndPassButton.setId(Util.BUTTON_USER_PASS);
-
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Felhasználónév és jelszó gomb létrehozásának befejezése!");
                         message = Util.createMessage(Util.BUTTON_USER_PASS, "A UserPassword gomb elkészült!");
+                        loginAccAndPassButton.setId(Util.BUTTON_USER_PASS);
                         message.obj = loginAccAndPassButton;
 
                         break;
@@ -154,9 +153,9 @@ public class CreateLoginButtons implements Callable {
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Pinkód gomb létrehozásának befejezése!");
                         message = Util.createMessage(Util.BUTTON_PINCODE, "A Pinkód gomb elkészült!");
+                        loginPinButton.setId(Util.BUTTON_PINCODE);
                         message.obj = loginPinButton;
 
-                        loginPinButton.setId(Util.BUTTON_PINCODE);
 
                         break;
                     }
@@ -176,9 +175,9 @@ public class CreateLoginButtons implements Callable {
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "RFID gomb létrehozásának befejezése!");
                         message = Util.createMessage(Util.BUTTON_RFID, "Az RFID gomb elkészült!");
+                        loginRFIDButton.setId(Util.BUTTON_RFID);
                         message.obj = loginRFIDButton;
 
-                        loginRFIDButton.setId(Util.BUTTON_RFID);
 
                         break;
                     }
@@ -198,9 +197,8 @@ public class CreateLoginButtons implements Callable {
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Barcode gomb létrehozásának befejezése!");
                         message = Util.createMessage(Util.BUTTON_BARCODE, "A Barcode gomb elkészült!");
-                        message.obj = loginBarcodeButton;
-
                         loginBarcodeButton.setId(Util.BUTTON_BARCODE);
+                        message.obj = loginBarcodeButton;
 
                         break;
                     }
