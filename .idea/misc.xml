@@ -24,13 +24,21 @@
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/language_button_background.xml" value="0.2265" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/retry_button_background.xml" value="0.2265" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main.xml" value="0.536" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main_mobile_landscape.xml" value="0.264" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main_mobile_portrait.xml" value="0.213768115942029" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main_pda_portrait.xml" value="0.23958333333333334" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_barcode_mobile_landscape.xml" value="0.213768115942029" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_barcode_mobile_portrait.xml" value="0.23958333333333334" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_barcode_pda_portrait.xml" value="0.23958333333333334" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_pin_code_mobile_landscape.xml" value="0.213768115942029" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_pin_code_mobile_portrait.xml" value="0.23958333333333334" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_pincode_pda_portrait.xml" value="0.20427350427350427" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_rfid_mobile_landscape.xml" value="0.264" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_rfid_mobile_portrait.xml" value="0.23958333333333334" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_rfid_pda_portrait.xml" value="0.264" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_user_and_password.xml" value="0.23958333333333334" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_user_and_password_mobile_landscape.xml" value="0.264" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_user_and_password_mobile_portrait.xml" value="0.213768115942029" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/fragment_user_and_password_pda_portrait.xml" value="0.264" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/startactivity_main_mobile_landscape.xml" value="0.23958333333333334" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/startactivity_main_mobile_portrait.xml" value="0.23958333333333334" />

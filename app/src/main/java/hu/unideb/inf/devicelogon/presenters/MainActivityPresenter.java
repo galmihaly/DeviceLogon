@@ -13,8 +13,13 @@ import java.util.List;
 import hu.unideb.inf.devicelogon.enums.FragmentTypes;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
+import hu.unideb.inf.devicelogon.fragments.mobilefragments.BarcodeFragmentMobile;
+import hu.unideb.inf.devicelogon.fragments.mobilefragments.PinCodeFragmentMobile;
 import hu.unideb.inf.devicelogon.fragments.mobilefragments.RFIDFragmentMobile;
 import hu.unideb.inf.devicelogon.fragments.mobilefragments.UserPassFragmentMobile;
+import hu.unideb.inf.devicelogon.fragments.pdafragments.BarcodeFragmentPDA;
+import hu.unideb.inf.devicelogon.fragments.pdafragments.PinCodeFragmentPDA;
+import hu.unideb.inf.devicelogon.fragments.pdafragments.RFIDFragmentPDA;
 import hu.unideb.inf.devicelogon.fragments.pdafragments.UserPassFragmentPDA;
 import hu.unideb.inf.devicelogon.interfaces.IFragmentNavigationPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
@@ -32,14 +37,14 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
     private Context context;
     private CustomThreadPoolManager mCustomThreadPoolManager;
     private MainActivityHandler mMainActivityHandler;
-    private WindowSizeClass[] windowSizeClasses;
+    private WindowSizeClass[] wsc;
 
     private List<Integer> typesOfLoginButton = new ArrayList<>();
 
     public MainActivityPresenter(IMainActivityView iMainActivityView, Context context, WindowSizeClass[] windowSizeClasses) {
         this.iMainActivityView = iMainActivityView;
         this.context = context;
-        this.windowSizeClasses = windowSizeClasses;
+        this.wsc = windowSizeClasses;
     }
 
     @Override
@@ -88,26 +93,23 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
     @Override
     public void addFragmentByEnum(FragmentTypes fragmentTypes) {
 
-        switch (fragmentTypes){
-            case USERPASSFRAGMENT:{
-                if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-                    iMainActivityView.loadOtherActivityFragment(new UserPassFragmentMobile());
-                }
-                else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-                    iMainActivityView.loadOtherActivityFragment(new UserPassFragmentPDA());
-                }
+        if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.COMPACT ||
+                wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
 
-                break;
+            switch (fragmentTypes){
+                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(new UserPassFragmentMobile()); break;
+                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(new RFIDFragmentMobile()); break;
+                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new PinCodeFragmentMobile()); break;
+                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new BarcodeFragmentMobile()); break;
             }
-            case RFIDFRAGMENT:{
-                if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-                    iMainActivityView.loadOtherActivityFragment(new RFIDFragmentMobile());
-                }
-                else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-                    iMainActivityView.loadOtherActivityFragment(new UserPassFragmentPDA());
-                }
+        }
+        else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
 
-                break;
+            switch (fragmentTypes){
+                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(new UserPassFragmentPDA()); break;
+                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(new RFIDFragmentPDA()); break;
+                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new PinCodeFragmentPDA()); break;
+                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new BarcodeFragmentPDA()); break;
             }
         }
     }

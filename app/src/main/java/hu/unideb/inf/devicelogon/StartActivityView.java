@@ -31,18 +31,20 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hideActionBar();
-        hideNavigationBar();
+        Util.hideActionBar(this);
+        Util.hideNavigationBar(this);
         initView();
 
         startActivityPresenter = new StartActivityPresenter(this, getApplicationContext());
         startActivityPresenter.initTaskManager();
+    }
 
-        Util.computeWindowSizeClasses(this);
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         if(buttonPr != null) {
             buttonPr.setOnClickListener((view -> {
-
                 try {
                     String inputString = modesNumberPr.getText().toString();
                     if(!inputString.equals("")){
@@ -52,13 +54,11 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 catch (NumberFormatException e){
                     e.printStackTrace();
                 }
-
             }));
         }
 
         if(buttonLs != null) {
             buttonLs.setOnClickListener((view -> {
-
                 try {
                     String inputString = modesNumberLs.getText().toString();
                     if(!inputString.equals("")){
@@ -68,7 +68,6 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 catch (NumberFormatException e){
                     e.printStackTrace();
                 }
-
             }));
         }
     }
@@ -82,10 +81,9 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
     private void initView(){
 
         WindowSizeClass[] windowSizeClasses = Util.computeWindowSizeClasses(this);
+        int orientation = this.getResources().getConfiguration().orientation;
 
         if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-            int orientation = this.getResources().getConfiguration().orientation;
-
             if(orientation == Configuration.ORIENTATION_PORTRAIT){
 
                 setContentView(R.layout.startactivity_main_mobile_portrait);
@@ -94,9 +92,9 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 modesNumberPr = findViewById(R.id.modesNumber_mobile_portrait);
                 buttonPr = findViewById(R.id.startButton_mobile_portrait);
             }
-            else if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-                Log.e("landscape", "la");
+        }
+        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+            if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
                 setContentView(R.layout.startactivity_main_mobile_landscape);
                 setTheme(R.style.DeviceLogon_landscape);
@@ -105,38 +103,14 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 buttonLs = findViewById(R.id.startButton_landscape);
             }
         }
+
         else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+
             setContentView(R.layout.startactivity_main_pda_portrait);
             setTheme(R.style.DeviceLogon_portrait);
 
             modesNumberPr = findViewById(R.id.modesNumber_pda_portrait);
             buttonPr = findViewById(R.id.startButton_pda_portrait);
         }
-
-
     }
-
-    private void hideActionBar(){
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if(getSupportActionBar() != null) getSupportActionBar().hide();
-    }
-
-    private void hideNavigationBar(){
-        View decorView = this.getWindow().getDecorView();
-
-        int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-        decorView.setSystemUiVisibility(flags);
-
-        decorView.setOnSystemUiVisibilityChangeListener(i -> {
-            if((i & View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION) != 0){
-                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-            }
-        });
-    }
-
-
 }

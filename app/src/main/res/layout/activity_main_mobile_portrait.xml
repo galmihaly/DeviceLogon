@@ -7,6 +7,7 @@
     tools:context=".MainActivityView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activityCL_mobile_portrait"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
@@ -37,9 +38,10 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView3_mobile_portrait" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loginModesCL1"
+            android:id="@+id/loginModesCL1_mobile_portrait"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toTopOf="@+id/loginModesButtonsCL_mobile_portrait"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +52,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginModesButtonsCL_mobile_portrait"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

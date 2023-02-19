@@ -4,29 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.mobilefragments.RFIDFragmentMobile">
-
+    tools:context=".fragments.mobilefragments.BarcodeFragmentMobile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rfidCL_mobile_portrait"
+        android:id="@+id/barcodeCL_mobile_landscape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/buttonsLayout2_mobile_portrait"
+            android:id="@+id/buttonsLayout4_mobile_landscape"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout1_mobile_portrait">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7_mobile_landscape">
 
             <Button
-                android:id="@+id/loginButton2_mobile_portrait"
+                android:id="@+id/loginButton4_mobile_landscape"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:background="@drawable/button_background"
                 android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
                 android:paddingEnd="15dp"
@@ -35,23 +34,22 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout1_mobile_portrait"
+            android:id="@+id/constraintLayout7_mobile_landscape"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_height="165dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4_mobile_portrait"
+                android:id="@+id/constraintLayout8_mobile_landscape"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:elevation="10dp"
@@ -61,38 +59,38 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView4_mobile_portrait"
+                    android:id="@+id/textView6_mobile_landscape"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="20dp"
-                    android:text="RFID"
+                    android:text="Vonalkód"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editTextRFID_mobile_portrait"
-                    android:layout_width="0dp"
+                    android:id="@+id/editTextBarcode_mobile_landscape"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/email_background"
-                    android:drawableStart="@drawable/mini_rfid"
+                    android:drawableStart="@drawable/mini_barcode"
                     android:drawablePadding="20dp"
                     android:ems="10"
-                    android:hint="rfid"
+                    android:hint="vonalkód"
                     android:inputType="textEmailAddress"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4_mobile_portrait" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView6_mobile_landscape" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

@@ -1,5 +1,6 @@
 package hu.unideb.inf.devicelogon.fragments.mobilefragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -20,10 +21,16 @@ public class RFIDFragmentMobile extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_rfid_mobile_portrait, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.fragment_rfid_mobile_portrait, container, false);
+        }
+        else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            view = inflater.inflate(R.layout.fragment_rfid_mobile_landscape, container, false);
+        }
 
         return view;
     }

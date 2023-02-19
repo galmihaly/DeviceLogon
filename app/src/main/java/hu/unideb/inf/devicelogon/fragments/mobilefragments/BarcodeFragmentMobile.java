@@ -1,5 +1,6 @@
 package hu.unideb.inf.devicelogon.fragments.mobilefragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -16,7 +17,15 @@ public class BarcodeFragmentMobile extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_barcode_mobile_portrait, container, false);
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.fragment_barcode_mobile_portrait, container, false);
+        }
+        else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            view = inflater.inflate(R.layout.fragment_barcode_mobile_landscape, container, false);
+        }
 
         return view;
     }
