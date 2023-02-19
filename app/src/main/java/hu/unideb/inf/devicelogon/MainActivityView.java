@@ -208,7 +208,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             clname = getResources().getResourceEntryName(loginModesCL1.getId());
         }
 
-        //Util.hideNavigationBar(this);
-        //Util.hideActionBar(this);
+        Util.hideNavigationBar(this);
+        Util.hideActionBar(this);
     }
 }
