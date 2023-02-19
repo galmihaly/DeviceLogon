@@ -1,6 +1,8 @@
 package hu.unideb.inf.devicelogon;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
     //Portrait
     private EditText modesNumberPr;
     private Button buttonPr;
+    private ConstraintLayout startactivityCL;
 
     //Landscape
     private EditText modesNumberLs;
@@ -42,6 +45,13 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
     @Override
     protected void onResume() {
         super.onResume();
+
+        if(startactivityCL != null){
+            startactivityCL.setOnClickListener(view -> {
+                Util.hideNavigationBar(this);
+                Util.hideKeyboard(this);
+            });
+        }
 
         if(buttonPr != null) {
             buttonPr.setOnClickListener((view -> {
@@ -89,6 +99,7 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 setContentView(R.layout.startactivity_main_mobile_portrait);
                 setTheme(R.style.DeviceLogon_portrait);
 
+                startactivityCL = findViewById(R.id.programstartCL_mobile_portrait);
                 modesNumberPr = findViewById(R.id.modesNumber_mobile_portrait);
                 buttonPr = findViewById(R.id.startButton_mobile_portrait);
             }
@@ -99,6 +110,7 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 setContentView(R.layout.startactivity_main_mobile_landscape);
                 setTheme(R.style.DeviceLogon_landscape);
 
+                startactivityCL = findViewById(R.id.programstartCL_mobile_landscape);
                 modesNumberLs = findViewById(R.id.modesNumber_landscape);
                 buttonLs = findViewById(R.id.startButton_landscape);
             }
@@ -109,6 +121,7 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
             setContentView(R.layout.startactivity_main_pda_portrait);
             setTheme(R.style.DeviceLogon_portrait);
 
+            startactivityCL = findViewById(R.id.programstartCL_pda_portrait);
             modesNumberPr = findViewById(R.id.modesNumber_pda_portrait);
             buttonPr = findViewById(R.id.startButton_pda_portrait);
         }

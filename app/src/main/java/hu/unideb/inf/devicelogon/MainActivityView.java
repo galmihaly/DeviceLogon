@@ -64,13 +64,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     protected void onResume() {
         super.onResume();
 
-        if(activityCL_pda_portrait != null){
-            activityCL_pda_portrait.setOnClickListener(view -> {
-                Util.hideNavigationBar(this);
-                Util.hideKeyboard(this);
-            });
-        }
-        else if(activityCL != null){
+        if(activityCL != null){
             activityCL.setOnClickListener(view -> {
                 Util.hideNavigationBar(this);
                 Util.hideKeyboard(this);
@@ -198,7 +192,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 setTheme(R.style.DeviceLogon_landscape);
                 llay = findViewById(R.id.cl2_mobile_landscape);
                 loginModesCL2 = findViewById(R.id.loginModesCL2_mobile_landscape);
-                activityCL = findViewById(R.id.activityCL_mobile_portrait);
+                activityCL = findViewById(R.id.activityCL_mobile_landscape);
 
                 clname = getResources().getResourceEntryName(loginModesCL2.getId());
             }
@@ -209,7 +203,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
             llay = findViewById(R.id.cl_pda_portrait);
             loginModesCL1 = findViewById(R.id.loginModesCL1_pda_portrait);
-            activityCL_pda_portrait = findViewById(R.id.activityCL_pda_portrait);
+            activityCL = findViewById(R.id.activityCL_pda_portrait);
 
             clname = getResources().getResourceEntryName(loginModesCL1.getId());
         }
