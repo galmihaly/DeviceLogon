@@ -1,8 +1,12 @@
 package hu.unideb.inf.devicelogon.utils;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.window.layout.WindowMetrics;
@@ -47,10 +51,10 @@ public class Util {
         else if (widthDp < 840f) { widthWindowSizeClass = WindowSizeClass.MEDIUM; }
         else { widthWindowSizeClass = WindowSizeClass.EXPANDED; }
 
-        Log.e("withdp", String.valueOf(widthDp));
-        Log.e("metrics.getBounds().width()", String.valueOf(metrics.getBounds().width()));
-        Log.e("getResources().getDisplayMetrics().density", String.valueOf(appCompatActivity.getResources().getDisplayMetrics().density));
-        Log.e("", String.valueOf(widthWindowSizeClass));
+//        Log.e("withdp", String.valueOf(widthDp));
+//        Log.e("metrics.getBounds().width()", String.valueOf(metrics.getBounds().width()));
+//        Log.e("getResources().getDisplayMetrics().density", String.valueOf(appCompatActivity.getResources().getDisplayMetrics().density));
+//        Log.e("", String.valueOf(widthWindowSizeClass));
 
         float heightDp = metrics.getBounds().height() / appCompatActivity.getResources().getDisplayMetrics().density;
 
@@ -60,10 +64,10 @@ public class Util {
         else if (heightDp < 900f) { heightWindowSizeClass = WindowSizeClass.MEDIUM; }
         else { heightWindowSizeClass = WindowSizeClass.EXPANDED; }
 
-        Log.e("", String.valueOf(heightDp));
-        Log.e("metrics.getBounds().height()", String.valueOf(metrics.getBounds().height()));
-        Log.e("getResources().getDisplayMetrics().density", String.valueOf(appCompatActivity.getResources().getDisplayMetrics().density));
-        Log.e("", String.valueOf(heightWindowSizeClass));
+//        Log.e("", String.valueOf(heightDp));
+//        Log.e("metrics.getBounds().height()", String.valueOf(metrics.getBounds().height()));
+//        Log.e("getResources().getDisplayMetrics().density", String.valueOf(appCompatActivity.getResources().getDisplayMetrics().density));
+//        Log.e("", String.valueOf(heightWindowSizeClass));
 
         WindowSizeClass[] result = new WindowSizeClass[]{
                 heightWindowSizeClass,
@@ -71,5 +75,37 @@ public class Util {
         };
 
         return result;
+    }
+
+    public static void hideActionBar(AppCompatActivity appCompatActivity){
+        appCompatActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if(appCompatActivity.getSupportActionBar() != null) appCompatActivity.getSupportActionBar().hide();
+    }
+
+    public static void hideNavigationBar(AppCompatActivity appCompatActivity){
+        View decorView = appCompatActivity.getWindow().getDecorView();
+
+        int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        decorView.setSystemUiVisibility(flags);
+
+        decorView.setOnSystemUiVisibilityChangeListener(i -> {
+            if((i & View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION) != 0){
+                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+            }
+        });
+    }
+
+    public static void hideKeyboard(AppCompatActivity appCompatActivity){
+
+        View view = appCompatActivity.getCurrentFocus();
+
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)appCompatActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

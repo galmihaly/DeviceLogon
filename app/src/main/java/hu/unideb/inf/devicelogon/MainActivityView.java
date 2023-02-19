@@ -17,7 +17,9 @@ import android.widget.Toast;
 
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
-import hu.unideb.inf.devicelogon.fragments.mobilefragments.RFIDFragmentPDA;
+import hu.unideb.inf.devicelogon.fragments.pdafragments.BarcodeFragmentPDA;
+import hu.unideb.inf.devicelogon.fragments.pdafragments.PinCodeFragmentPDA;
+import hu.unideb.inf.devicelogon.fragments.pdafragments.RFIDFragmentPDA;
 import hu.unideb.inf.devicelogon.fragments.pdafragments.UserPassFragmentPDA;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.presenters.MainActivityPresenter;
@@ -37,19 +39,19 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private ConstraintLayout loginModesCL1;
     private ConstraintLayout loginModesCL2;
 
+    private WindowSizeClass[] windowSizeClasses;
+
     private boolean isEmpty = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hideNavigationBar();
-        hideActionBar();
         initView();
 
-        WindowSizeClass[] windowSizeClasses = Util.computeWindowSizeClasses(this);
-
-        mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext(), windowSizeClasses);
-        mainActivityPresenter.initTaskManager();
+        if(windowSizeClasses != null) {
+            mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext(), windowSizeClasses);
+            mainActivityPresenter.initTaskManager();
+        }
 
         if(loginBarcodeButton == null || loginRFIDButton == null || loginPinButton == null || loginAccAndPassButton == null){
             Intent intent = getIntent();
@@ -70,39 +72,46 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
         if(activityCL_pda_portrait != null){
             activityCL_pda_portrait.setOnClickListener(view -> {
-                hideNavigationBar();
-                hideKeyboard();
+                Util.hideNavigationBar(this);
+                Util.hideKeyboard(this);
             });
         }
 
         if(loginAccAndPassButton != null){
             loginAccAndPassButton.setOnClickListener(view -> {
-                Toast.makeText(getApplicationContext(), "USERPASS", Toast.LENGTH_LONG).show();
+
+                if(loginModesCL1 != null){
+                    mainActivityPresenter.addFragment(new UserPassFragmentPDA());
+                }
             });
         }
 
         if(loginPinButton != null){
             loginPinButton.setOnClickListener(view -> {
-                Toast.makeText(getApplicationContext(), "PIN", Toast.LENGTH_LONG).show();
+
+                if(loginModesCL1 != null){
+                    mainActivityPresenter.addFragment(new PinCodeFragmentPDA());
+                }
             });
         }
 
         if(loginRFIDButton != null){
             loginRFIDButton.setOnClickListener(view -> {
-                Toast.makeText(getApplicationContext(), "RFID", Toast.LENGTH_LONG).show();
-                if(loginModesCL1 != null){
 
-                    mainActivityPresenter.addFragment(new UserPassFragmentPDA());
+                if(loginModesCL1 != null){
+                    mainActivityPresenter.addFragment(new RFIDFragmentPDA());
                 }
             });
         }
 
         if(loginBarcodeButton != null){
             loginBarcodeButton.setOnClickListener(view -> {
-                Toast.makeText(getApplicationContext(), "BARCODE", Toast.LENGTH_LONG).show();
+
+                if(loginModesCL1 != null){
+                    mainActivityPresenter.addFragment(new BarcodeFragmentPDA());
+                }
             });
         }
-
     }
 
     @Override
@@ -111,35 +120,18 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
         baseFragment.atachPresenter(mainActivityPresenter);
 
-//        if(isEmpty){
-//            if(loginModesCL1 != null){
-//                getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.loginModesCL1_pda_portrait, baseFragment)
-//                        .commit();
-//            }
-//            else if(loginModesCL2 != null){
-//                getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.loginModesCL2, baseFragment)
-//                        .commit();
-//            }
-//        }
-
-//        if(loginModesCL1 != null){
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.loginModesCL1_pda_portrait, baseFragment)
-//                    .commit();
-//        }
-//        else if(loginModesCL2 != null){
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.loginModesCL2, baseFragment)
-//                    .commit();
-//        }
-
-        //isEmpty = false;
+        if(loginModesCL1 != null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.loginModesCL1_pda_portrait, baseFragment)
+                    .commit();
+        }
+        else if(loginModesCL2 != null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.loginModesCL2, baseFragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -174,7 +166,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
     private void initView(){
 
-        WindowSizeClass[] windowSizeClasses = Util.computeWindowSizeClasses(this);
+        windowSizeClasses = Util.computeWindowSizeClasses(this);
 
         if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
             int orientation = this.getResources().getConfiguration().orientation;
@@ -186,7 +178,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 loginModesCL1 = findViewById(R.id.loginModesCL1);
 
             }
-            if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            else if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
                 setContentView(R.layout.activity_main_mobile_landscape);
                 setTheme(R.style.DeviceLogon_landscape);
@@ -209,39 +201,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
         }
 
-
+        Util.hideNavigationBar(this);
+        Util.hideActionBar(this);
     }
-
-    private void hideActionBar(){
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if(getSupportActionBar() != null) getSupportActionBar().hide();
-    }
-
-    private void hideNavigationBar(){
-        View decorView = this.getWindow().getDecorView();
-
-        int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-        decorView.setSystemUiVisibility(flags);
-
-        decorView.setOnSystemUiVisibilityChangeListener(i -> {
-            if((i & View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION) != 0){
-                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-            }
-        });
-    }
-
-    private void hideKeyboard(){
-
-        View view = this.getCurrentFocus();
-
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
 }

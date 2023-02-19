@@ -73,7 +73,6 @@ public class CustomThreadPoolManager {
         }
     }
 
-
     private static class BackgroundThreadFactory implements ThreadFactory {
 
         @Override
