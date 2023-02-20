@@ -110,6 +110,13 @@ public class CreateLoginButtons implements Callable {
                 typesOfLoginButton.add(8);
             }
 
+            message = Util.createMessage(Util.BUTTONS_LIST_SIZE, "A létrehozandó gombok száma!");
+            message.obj = typesOfLoginButton.size();
+
+            if(ctpmw != null && ctpmw.get() != null && message != null) {
+                ctpmw.get().sendResultToPresenter(message);
+            }
+
             for (int i = 0; i < typesOfLoginButton.size(); i++) {
                 switch (typesOfLoginButton.get(i)){
                     case 0: {
@@ -209,7 +216,6 @@ public class CreateLoginButtons implements Callable {
                 }
 
                 if(ctpmw != null && ctpmw.get() != null && message != null) {
-                    Log.e("e", "hellpo");
                     ctpmw.get().sendResultToPresenter(message);
                 }
             }

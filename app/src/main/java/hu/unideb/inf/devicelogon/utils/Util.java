@@ -1,16 +1,20 @@
 package hu.unideb.inf.devicelogon.utils;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.window.layout.WindowMetrics;
 import androidx.window.layout.WindowMetricsCalculator;
+
+import java.util.List;
 
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 
@@ -28,6 +32,9 @@ public class Util {
     public static final int BUTTON_PINCODE = 11;
     public static final int BUTTON_RFID = 12;
     public static final int BUTTON_BARCODE = 13;
+
+    // Size of Buttons List
+    public static final int BUTTONS_LIST_SIZE = 100;
 
     public static Message createMessage(int id, String dataString) {
         Bundle bundle = new Bundle();
@@ -106,6 +113,18 @@ public class Util {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager)appCompatActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public static void changeButtonColor(List<ImageButton> imageButtonList, int isActive){
+
+        for (int i = 0; i < imageButtonList.size(); i++) {
+            if(i == isActive){
+                imageButtonList.get(i).getBackground().setAlpha(128);
+            }
+            else {
+                imageButtonList.get(i).getBackground().setAlpha(255);
+            }
         }
     }
 }

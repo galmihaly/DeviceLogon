@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.ImageButton;
 
 import java.lang.ref.WeakReference;
@@ -97,26 +98,31 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
                 wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
 
             switch (fragmentTypes){
-                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(new UserPassFragmentMobile()); break;
-                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(new RFIDFragmentMobile()); break;
-                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new PinCodeFragmentMobile()); break;
-                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new BarcodeFragmentMobile()); break;
+                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new UserPassFragmentMobile()); break;
+                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new RFIDFragmentMobile()); break;
+                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new PinCodeFragmentMobile()); break;
+                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new BarcodeFragmentMobile()); break;
             }
         }
         else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
 
             switch (fragmentTypes){
-                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(new UserPassFragmentPDA()); break;
-                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(new RFIDFragmentPDA()); break;
-                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new PinCodeFragmentPDA()); break;
-                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(new BarcodeFragmentPDA()); break;
+                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new UserPassFragmentPDA()); break;
+                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new RFIDFragmentPDA()); break;
+                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new PinCodeFragmentPDA()); break;
+                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new BarcodeFragmentPDA()); break;
             }
         }
     }
 
     @Override
+    public void sendButtonsListSize(int buttonsListSize) {
+        iMainActivityView.getButtonsListSize(buttonsListSize);
+    }
+
+    @Override
     public void addFragment(BaseFragment baseFragment) {
-        iMainActivityView.loadOtherActivityFragment(baseFragment);
+        //iMainActivityView.loadOtherActivityFragment(baseFragment);
     }
 
     private static class MainActivityHandler extends Handler {
@@ -172,6 +178,10 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
                         iMainActivityPresenterWeakReference.get().addFragmentByEnum(FragmentTypes.RFIDFRAGMENT);
                     }
 
+                    break;
+                }
+                case Util.BUTTONS_LIST_SIZE:{
+                    iMainActivityPresenterWeakReference.get().sendButtonsListSize((int) msg.obj);
                     break;
                 }
             }

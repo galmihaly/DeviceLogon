@@ -13,4 +13,5 @@ public interface IMainActivityPresenter {
     void initButtonsByLoginModesNumber(int modesNumber);
     void sendButtonToPresenter(ImageButton imageButton);
     void addFragmentByEnum(FragmentTypes fragmentTypes);
+    void sendButtonsListSize(int buttonsListSize);
 }

@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3_mobile_portrait" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/loginModesCL1_mobile_portrait"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_mobile_portrait">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.viewpager2.widget.ViewPager2>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginModesButtonsCL_mobile_portrait"

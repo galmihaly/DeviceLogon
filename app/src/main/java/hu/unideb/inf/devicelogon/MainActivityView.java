@@ -2,14 +2,26 @@ package hu.unideb.inf.devicelogon;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import hu.unideb.inf.devicelogon.adapters.FragmentPagerAdapter;
 import hu.unideb.inf.devicelogon.enums.FragmentTypes;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
@@ -26,15 +38,20 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private ImageButton loginPinButton;
     private ImageButton loginRFIDButton;
     private ImageButton loginBarcodeButton;
-    private ConstraintLayout activityCL_pda_portrait;
     private ConstraintLayout activityCL;
 
-    private ConstraintLayout loginModesCL1;
-    private ConstraintLayout loginModesCL2;
+    private ViewPager2 loginModesCL1;
+    private ViewPager2 loginModesCL2;
 
     private WindowSizeClass[] windowSizeClasses;
 
-    private String clname;
+    private final List<BaseFragment> baseFragmentList = new ArrayList<>();
+
+    private int modesNumber;
+    private int buttonsListSize;
+    private FragmentPagerAdapter fragmentPagerAdapter;
+    private int position;
+    private List<ImageButton> imageButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +61,12 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         if(windowSizeClasses != null) {
             mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext(), windowSizeClasses);
             mainActivityPresenter.initTaskManager();
+            fragmentPagerAdapter = new FragmentPagerAdapter(this);
         }
 
         if(loginBarcodeButton == null || loginRFIDButton == null || loginPinButton == null || loginAccAndPassButton == null){
             Intent intent = getIntent();
-            int modesNumber = intent.getIntExtra("ModesNumber", -1);
+            modesNumber = intent.getIntExtra("ModesNumber", -1);
 
             if(modesNumber != -1) mainActivityPresenter.initButtonsByLoginModesNumber(modesNumber);
         }
@@ -71,67 +89,72 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             });
         }
 
-        // ki kell szervezni a presenterbe az ezután lévő részt
+        if(loginAccAndPassButton != null){
+            loginAccAndPassButton.setOnClickListener(view -> {
 
-        if(loginModesCL1 != null || loginModesCL2 != null){
+                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.USERPASSFRAGMENT);
+                Util.changeButtonColor(imageButtons, position);
 
-            if(loginAccAndPassButton != null){
-                loginAccAndPassButton.setOnClickListener(view -> {
+                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
+                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
 
-                    mainActivityPresenter.addFragmentByEnum(FragmentTypes.USERPASSFRAGMENT);
-                });
-            }
-            if(loginPinButton != null){
-                loginPinButton.setOnClickListener(view -> {
+            });
+        }
+        if(loginPinButton != null){
+            loginPinButton.setOnClickListener(view -> {
 
-                    mainActivityPresenter.addFragmentByEnum(FragmentTypes.PINCODEFRAGMENT);
-                });
-            }
-            if(loginRFIDButton != null){
-                loginRFIDButton.setOnClickListener(view -> {
+                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.PINCODEFRAGMENT);
+                Util.changeButtonColor(imageButtons, position);
 
-                    mainActivityPresenter.addFragmentByEnum(FragmentTypes.RFIDFRAGMENT);
-                });
-            }
-            if(loginBarcodeButton != null){
-                loginBarcodeButton.setOnClickListener(view -> {
+                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
+                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
+            });
+        }
+        if(loginRFIDButton != null){
+            loginRFIDButton.setOnClickListener(view -> {
 
-                    mainActivityPresenter.addFragmentByEnum(FragmentTypes.BARCODEFRAGMENT);
-                });
-            }
+                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.RFIDFRAGMENT);
+                Util.changeButtonColor(imageButtons, position);
+
+                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
+                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
+
+            });
+        }
+        if(loginBarcodeButton != null){
+            loginBarcodeButton.setOnClickListener(view -> {
+
+                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.BARCODEFRAGMENT);
+                Util.changeButtonColor(imageButtons, position);
+
+                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
+                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
+            });
         }
     }
 
     @Override
-    public void loadOtherActivityFragment(BaseFragment baseFragment) {
+    public void loadOtherActivityFragment(FragmentTypes fragmentTypes, BaseFragment baseFragment) {
         if(baseFragment == null) return;
 
         baseFragment.atachPresenter(mainActivityPresenter);
 
-        if(loginModesCL1 != null) {
+        if(loginModesCL1 != null && fragmentPagerAdapter != null) {
 
-            if(clname.equals("loginModesCL1_mobile_portrait")) {
+            fragmentPagerAdapter.addFragment(baseFragment);
+            fragmentPagerAdapter.setItem(fragmentTypes, baseFragment);
 
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.loginModesCL1_mobile_portrait, baseFragment)
-                        .commit();
-            }
-            else if(clname.equals("loginModesCL1_pda_portrait")) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.loginModesCL1_pda_portrait, baseFragment)
-                        .commit();
+            if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
+                loginModesCL1.setAdapter(fragmentPagerAdapter);
             }
         }
-        else if(loginModesCL2 != null){
+        else if(loginModesCL2 != null && fragmentPagerAdapter != null){
 
-            if(clname.equals("loginModesCL2_mobile_landscape")) {
+            fragmentPagerAdapter.addFragment(baseFragment);
+            fragmentPagerAdapter.setItem(fragmentTypes, baseFragment);
 
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.loginModesCL2_mobile_landscape, baseFragment)
-                        .commit();
+            if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
+                loginModesCL2.setAdapter(fragmentPagerAdapter);
             }
         }
     }
@@ -148,22 +171,31 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             case Util.BUTTON_USER_PASS:{
                 Log.e("", "asdasda");
                 loginAccAndPassButton = imageButton;
+                imageButtons.add(imageButton);
                 break;
             }
             case Util.BUTTON_PINCODE:{
                 loginPinButton = imageButton;
+                imageButtons.add(imageButton);
                 break;
             }
             case Util.BUTTON_RFID:{
                 loginRFIDButton = imageButton;
+                imageButtons.add(imageButton);
                 break;
             }
             case Util.BUTTON_BARCODE:{
                 loginBarcodeButton = imageButton;
+                imageButtons.add(imageButton);
                 break;
             }
         }
         onResume();
+    }
+
+    @Override
+    public void getButtonsListSize(int integer) {
+        buttonsListSize = integer;
     }
 
     private void initView(){
@@ -179,9 +211,6 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 llay = findViewById(R.id.cl_mobile_portrait);
                 loginModesCL1 = findViewById(R.id.loginModesCL1_mobile_portrait);
                 activityCL = findViewById(R.id.activityCL_mobile_portrait);
-
-                clname = getResources().getResourceEntryName(loginModesCL1.getId());
-
             }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
@@ -193,8 +222,6 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 llay = findViewById(R.id.cl2_mobile_landscape);
                 loginModesCL2 = findViewById(R.id.loginModesCL2_mobile_landscape);
                 activityCL = findViewById(R.id.activityCL_mobile_landscape);
-
-                clname = getResources().getResourceEntryName(loginModesCL2.getId());
             }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
@@ -205,10 +232,11 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             loginModesCL1 = findViewById(R.id.loginModesCL1_pda_portrait);
             activityCL = findViewById(R.id.activityCL_pda_portrait);
 
-            clname = getResources().getResourceEntryName(loginModesCL1.getId());
         }
 
         Util.hideNavigationBar(this);
         Util.hideActionBar(this);
+
+        imageButtons = new ArrayList<>();
     }
 }

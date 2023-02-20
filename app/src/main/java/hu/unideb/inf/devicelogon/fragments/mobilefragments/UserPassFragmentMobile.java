@@ -3,12 +3,9 @@ package hu.unideb.inf.devicelogon.fragments.mobilefragments;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import hu.unideb.inf.devicelogon.R;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
