@@ -35,6 +35,16 @@ public class FragmentPagerAdapter extends FragmentStateAdapter {
         return baseFragmentList.get(position);
     }
 
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return baseFragmentList.size();
+    }
+
     public void addFragment(BaseFragment baseFragment){
         this.baseFragmentList.add(baseFragment);
     }
@@ -59,17 +69,9 @@ public class FragmentPagerAdapter extends FragmentStateAdapter {
         return position;
     }
 
+
+
     public void setItem(FragmentTypes fragmentTypes, BaseFragment baseFragment){
         baseFragmentHashMap.put(fragmentTypes, baseFragment);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return super.getItemId(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return baseFragmentList.size();
     }
 }

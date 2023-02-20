@@ -190,6 +190,11 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 break;
             }
         }
+
+        if(imageButtons.size() != 0){
+            Util.changeButtonColor(imageButtons, 0);
+        }
+
         onResume();
     }
 

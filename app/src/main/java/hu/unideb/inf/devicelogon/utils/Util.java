@@ -58,11 +58,6 @@ public class Util {
         else if (widthDp < 840f) { widthWindowSizeClass = WindowSizeClass.MEDIUM; }
         else { widthWindowSizeClass = WindowSizeClass.EXPANDED; }
 
-//        Log.e("withdp", String.valueOf(widthDp));
-//        Log.e("metrics.getBounds().width()", String.valueOf(metrics.getBounds().width()));
-//        Log.e("getResources().getDisplayMetrics().density", String.valueOf(appCompatActivity.getResources().getDisplayMetrics().density));
-//        Log.e("", String.valueOf(widthWindowSizeClass));
-
         float heightDp = metrics.getBounds().height() / appCompatActivity.getResources().getDisplayMetrics().density;
 
         WindowSizeClass heightWindowSizeClass;
@@ -70,11 +65,6 @@ public class Util {
         if (heightDp < 600f) { heightWindowSizeClass = WindowSizeClass.COMPACT;}
         else if (heightDp < 900f) { heightWindowSizeClass = WindowSizeClass.MEDIUM; }
         else { heightWindowSizeClass = WindowSizeClass.EXPANDED; }
-
-//        Log.e("", String.valueOf(heightDp));
-//        Log.e("metrics.getBounds().height()", String.valueOf(metrics.getBounds().height()));
-//        Log.e("getResources().getDisplayMetrics().density", String.valueOf(appCompatActivity.getResources().getDisplayMetrics().density));
-//        Log.e("", String.valueOf(heightWindowSizeClass));
 
         WindowSizeClass[] result = new WindowSizeClass[]{
                 heightWindowSizeClass,
@@ -119,11 +109,13 @@ public class Util {
     public static void changeButtonColor(List<ImageButton> imageButtonList, int isActive){
 
         for (int i = 0; i < imageButtonList.size(); i++) {
-            if(i == isActive){
+            if(i != isActive){
                 imageButtonList.get(i).getBackground().setAlpha(128);
+                imageButtonList.get(i).setImageAlpha(128);
             }
             else {
                 imageButtonList.get(i).getBackground().setAlpha(255);
+                imageButtonList.get(i).setImageAlpha(255);
             }
         }
     }
