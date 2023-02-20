@@ -5,11 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.ArrayList;
@@ -19,11 +21,13 @@ import java.util.Map;
 
 import hu.unideb.inf.devicelogon.enums.FragmentTypes;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
+import hu.unideb.inf.devicelogon.utils.Util;
 
 public class FragmentPagerAdapter extends FragmentStateAdapter {
 
     private List<BaseFragment> baseFragmentList = new ArrayList<>();
     private HashMap<FragmentTypes, BaseFragment> baseFragmentHashMap = new HashMap<>();
+    private List<ImageButton> imageButtonList = new ArrayList<>();
 
     public FragmentPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -36,11 +40,6 @@ public class FragmentPagerAdapter extends FragmentStateAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return super.getItemId(position);
-    }
-
-    @Override
     public int getItemCount() {
         return baseFragmentList.size();
     }
@@ -49,29 +48,33 @@ public class FragmentPagerAdapter extends FragmentStateAdapter {
         this.baseFragmentList.add(baseFragment);
     }
 
-    public int getCurrentFragment(FragmentTypes fragmentTypes){
-        int position = -1;
+    public int setCurrentButtonColorByEnum(FragmentTypes fragmentTypes){
 
         for (Map.Entry<FragmentTypes, BaseFragment> entry : baseFragmentHashMap.entrySet()){
-            Log.e("name", String.valueOf(entry.getKey()));
+
             if(entry.getKey() == fragmentTypes){
                 for (int i = 0; i < baseFragmentList.size(); i++) {
                     if(entry.getValue().equals(baseFragmentList.get(i))){
-                        position = i;
-                        break;
+                        Util.changeButtonColor(imageButtonList, i);
+                        return i;
                     }
                 }
                 break;
             }
         }
 
-        if(position != -1) return position;
-        return position;
+        return -1;
     }
 
+    public void setCurrentButtonColorByPosition(int position){
+        Util.changeButtonColor(imageButtonList, position);
+    }
 
-
-    public void setItem(FragmentTypes fragmentTypes, BaseFragment baseFragment){
+    public void addItemToHashMap(FragmentTypes fragmentTypes, BaseFragment baseFragment){
         baseFragmentHashMap.put(fragmentTypes, baseFragment);
+    }
+
+    public void addButtonToList(ImageButton imageButtons){
+        imageButtonList.add(imageButtons);
     }
 }

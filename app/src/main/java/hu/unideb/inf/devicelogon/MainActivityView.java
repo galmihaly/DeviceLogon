@@ -2,16 +2,10 @@ package hu.unideb.inf.devicelogon;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -19,9 +13,10 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import hu.unideb.inf.devicelogon.adapters.FragmentPagerAdapter;
+import hu.unideb.inf.devicelogon.listeners.LoginButtonListener;
+import hu.unideb.inf.devicelogon.listeners.ViewPagerListener;
 import hu.unideb.inf.devicelogon.enums.FragmentTypes;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
@@ -45,13 +40,14 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
     private WindowSizeClass[] windowSizeClasses;
 
-    private final List<BaseFragment> baseFragmentList = new ArrayList<>();
-
     private int modesNumber;
     private int buttonsListSize;
     private FragmentPagerAdapter fragmentPagerAdapter;
-    private int position;
-    private List<ImageButton> imageButtons;
+
+    private LoginButtonListener loginButtonListener1 = new LoginButtonListener();
+    private LoginButtonListener loginButtonListener2 = new LoginButtonListener();
+    private LoginButtonListener loginButtonListener3 = new LoginButtonListener();
+    private LoginButtonListener loginButtonListener4 = new LoginButtonListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,47 +85,42 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             });
         }
 
+        ViewPagerListener viewPagerListener = ViewPagerListener.getInstance(fragmentPagerAdapter);
+
+        if(loginModesCL1 != null) { loginModesCL1.registerOnPageChangeCallback(viewPagerListener); }
+        if(loginModesCL2 != null) { loginModesCL2.registerOnPageChangeCallback(viewPagerListener); }
+
         if(loginAccAndPassButton != null){
-            loginAccAndPassButton.setOnClickListener(view -> {
+            if(loginModesCL1 != null) loginButtonListener1.setViewPager(loginModesCL1);
+            if(loginModesCL2 != null) loginButtonListener1.setViewPager(loginModesCL2);
+            loginButtonListener1.setFragmentPagerAdapter(fragmentPagerAdapter);
+            loginButtonListener1.setfT(FragmentTypes.USERPASSFRAGMENT);
 
-                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.USERPASSFRAGMENT);
-                Util.changeButtonColor(imageButtons, position);
-
-                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
-                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
-
-            });
+            loginAccAndPassButton.setOnClickListener(loginButtonListener1);
         }
         if(loginPinButton != null){
-            loginPinButton.setOnClickListener(view -> {
+            if(loginModesCL1 != null) loginButtonListener2.setViewPager(loginModesCL1);
+            if(loginModesCL2 != null) loginButtonListener2.setViewPager(loginModesCL2);
+            loginButtonListener2.setFragmentPagerAdapter(fragmentPagerAdapter);
+            loginButtonListener2.setfT(FragmentTypes.PINCODEFRAGMENT);
 
-                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.PINCODEFRAGMENT);
-                Util.changeButtonColor(imageButtons, position);
-
-                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
-                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
-            });
+            loginPinButton.setOnClickListener(loginButtonListener2);
         }
         if(loginRFIDButton != null){
-            loginRFIDButton.setOnClickListener(view -> {
+            if(loginModesCL1 != null) loginButtonListener3.setViewPager(loginModesCL1);
+            if(loginModesCL2 != null) loginButtonListener3.setViewPager(loginModesCL2);
+            loginButtonListener3.setFragmentPagerAdapter(fragmentPagerAdapter);
+            loginButtonListener3.setfT(FragmentTypes.RFIDFRAGMENT);
 
-                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.RFIDFRAGMENT);
-                Util.changeButtonColor(imageButtons, position);
-
-                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
-                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
-
-            });
+            loginRFIDButton.setOnClickListener(loginButtonListener3);
         }
         if(loginBarcodeButton != null){
-            loginBarcodeButton.setOnClickListener(view -> {
+            if(loginModesCL1 != null) loginButtonListener4.setViewPager(loginModesCL1);
+            if(loginModesCL2 != null) loginButtonListener4.setViewPager(loginModesCL2);
+            loginButtonListener4.setFragmentPagerAdapter(fragmentPagerAdapter);
+            loginButtonListener4.setfT(FragmentTypes.BARCODEFRAGMENT);
 
-                position = fragmentPagerAdapter.getCurrentFragment(FragmentTypes.BARCODEFRAGMENT);
-                Util.changeButtonColor(imageButtons, position);
-
-                if(loginModesCL1 != null) { loginModesCL1.setCurrentItem(position); }
-                else if(loginModesCL2 != null){ loginModesCL2.setCurrentItem(position); }
-            });
+            loginBarcodeButton.setOnClickListener(loginButtonListener4);
         }
     }
 
@@ -142,8 +133,9 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         if(loginModesCL1 != null && fragmentPagerAdapter != null) {
 
             fragmentPagerAdapter.addFragment(baseFragment);
-            fragmentPagerAdapter.setItem(fragmentTypes, baseFragment);
+            fragmentPagerAdapter.addItemToHashMap(fragmentTypes, baseFragment);
 
+            // az adaptert a várható létrehozandó gombok száma alapján tesszük a ViewPager controllba
             if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
                 loginModesCL1.setAdapter(fragmentPagerAdapter);
             }
@@ -151,7 +143,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         else if(loginModesCL2 != null && fragmentPagerAdapter != null){
 
             fragmentPagerAdapter.addFragment(baseFragment);
-            fragmentPagerAdapter.setItem(fragmentTypes, baseFragment);
+            fragmentPagerAdapter.addItemToHashMap(fragmentTypes, baseFragment);
 
             if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
                 loginModesCL2.setAdapter(fragmentPagerAdapter);
@@ -169,32 +161,26 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
         switch (imageButton.getId()){
             case Util.BUTTON_USER_PASS:{
-                Log.e("", "asdasda");
                 loginAccAndPassButton = imageButton;
-                imageButtons.add(imageButton);
+                fragmentPagerAdapter.addButtonToList(imageButton);
                 break;
             }
             case Util.BUTTON_PINCODE:{
                 loginPinButton = imageButton;
-                imageButtons.add(imageButton);
+                fragmentPagerAdapter.addButtonToList(imageButton);
                 break;
             }
             case Util.BUTTON_RFID:{
                 loginRFIDButton = imageButton;
-                imageButtons.add(imageButton);
+                fragmentPagerAdapter.addButtonToList(imageButton);
                 break;
             }
             case Util.BUTTON_BARCODE:{
                 loginBarcodeButton = imageButton;
-                imageButtons.add(imageButton);
+                fragmentPagerAdapter.addButtonToList(imageButton);
                 break;
             }
         }
-
-        if(imageButtons.size() != 0){
-            Util.changeButtonColor(imageButtons, 0);
-        }
-
         onResume();
     }
 
@@ -230,18 +216,16 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+
             setContentView(R.layout.activity_main_pda_portrait);
             setTheme(R.style.DeviceLogon_portrait);
 
             llay = findViewById(R.id.cl_pda_portrait);
             loginModesCL1 = findViewById(R.id.loginModesCL1_pda_portrait);
             activityCL = findViewById(R.id.activityCL_pda_portrait);
-
         }
 
         Util.hideNavigationBar(this);
         Util.hideActionBar(this);
-
-        imageButtons = new ArrayList<>();
     }
 }
