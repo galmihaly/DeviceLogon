@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -34,8 +32,6 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Util.hideActionBar(this);
-        Util.hideNavigationBar(this);
         initView();
 
         startActivityPresenter = new StartActivityPresenter(this, getApplicationContext());
@@ -111,11 +107,21 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 setTheme(R.style.DeviceLogon_landscape);
 
                 startactivityCL = findViewById(R.id.programstartCL_mobile_landscape);
-                modesNumberLs = findViewById(R.id.modesNumber_landscape);
-                buttonLs = findViewById(R.id.startButton_landscape);
+                modesNumberLs = findViewById(R.id.modesNumber_mobile_landscape);
+                buttonLs = findViewById(R.id.startButton_mobile_landscape);
             }
         }
+        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+            if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
+                setContentView(R.layout.startactivity_main_tablet_landscape);
+                setTheme(R.style.DeviceLogon_landscape);
+
+                startactivityCL = findViewById(R.id.programstartCL_tablet_landscape);
+                modesNumberLs = findViewById(R.id.modesNumber_tablet_landscape);
+                buttonLs = findViewById(R.id.startButton_tablet_landscape);
+            }
+        }
         else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
 
             setContentView(R.layout.startactivity_main_pda_portrait);
@@ -125,5 +131,8 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
             modesNumberPr = findViewById(R.id.modesNumber_pda_portrait);
             buttonPr = findViewById(R.id.startButton_pda_portrait);
         }
+
+        Util.hideActionBar(this);
+        Util.hideNavigationBar(this);
     }
 }

@@ -109,8 +109,8 @@ public class Util {
     public static void changeButtonColor(List<ImageButton> imageButtonList, int isActive){
         for (int i = 0; i < imageButtonList.size(); i++) {
             if(i != isActive){
-                imageButtonList.get(i).getBackground().setAlpha(128);
-                imageButtonList.get(i).setImageAlpha(128);
+                imageButtonList.get(i).getBackground().setAlpha(60);
+                imageButtonList.get(i).setImageAlpha(40);
             }
             else {
                 imageButtonList.get(i).getBackground().setAlpha(255);

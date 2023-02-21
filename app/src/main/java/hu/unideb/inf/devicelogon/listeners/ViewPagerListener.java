@@ -9,13 +9,15 @@ public class ViewPagerListener extends ViewPager2.OnPageChangeCallback {
     private FragmentPagerAdapter fragmentPagerAdapter;
     private static ViewPagerListener mInstance;
 
-    public ViewPagerListener(FragmentPagerAdapter fragmentPagerAdapter) { this.fragmentPagerAdapter = fragmentPagerAdapter; }
-
-    public static ViewPagerListener getInstance(FragmentPagerAdapter fragmentPagerAdapter){
+    public static ViewPagerListener getInstance(){
         if(mInstance == null){
-            mInstance = new ViewPagerListener(fragmentPagerAdapter);
+            mInstance = new ViewPagerListener();
         }
         return mInstance;
+    }
+
+    public void setFragmentPagerAdapter(FragmentPagerAdapter fragmentPagerAdapter) {
+        this.fragmentPagerAdapter = fragmentPagerAdapter;
     }
 
     @Override

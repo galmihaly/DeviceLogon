@@ -1,8 +1,7 @@
-package hu.unideb.inf.devicelogon.fragments.mobilefragments;
+package hu.unideb.inf.devicelogon.fragments.tabletfragments;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.view.ViewGroup;
 import hu.unideb.inf.devicelogon.R;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 
-public class RFIDFragmentMobile extends BaseFragment {
+public class RFIDFragmentTablet extends BaseFragment {
 
     private View view;
 
@@ -23,7 +22,7 @@ public class RFIDFragmentMobile extends BaseFragment {
             view = inflater.inflate(R.layout.fragment_rfid_mobile_portrait, container, false);
         }
         else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            view = inflater.inflate(R.layout.fragment_rfid_mobile_landscape, container, false);
+            view = inflater.inflate(R.layout.fragment_rfid_tablet_landscape, container, false);
         }
 
         return view;

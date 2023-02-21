@@ -1,11 +1,12 @@
 package hu.unideb.inf.devicelogon.tasks;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Message;
-import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import hu.unideb.inf.devicelogon.R;
+import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.logger.ApplicationLogger;
 import hu.unideb.inf.devicelogon.logger.LogLevel;
 import hu.unideb.inf.devicelogon.tasksmanager.CustomThreadPoolManager;
@@ -27,6 +29,7 @@ public class CreateLoginButtons implements Callable {
     private int modesNumber;
     private Context context;
     private List<Integer> typesOfLoginButton = new ArrayList<>();
+    private WindowSizeClass[] wsc;
 
     //LoginButtons
     private ImageButton loginAccAndPassButton = null;
@@ -42,9 +45,10 @@ public class CreateLoginButtons implements Callable {
     //Message
     private Message message;
 
-    public CreateLoginButtons(Context context, int modeNumber) {
+    public CreateLoginButtons(Context context, int modeNumber, WindowSizeClass[] wsc) {
         this.modesNumber = modeNumber;
         this.context = context;
+        this.wsc = wsc;
     }
 
     public void setCustomThreadPoolManager(CustomThreadPoolManager customThreadPoolManager) {
@@ -113,8 +117,83 @@ public class CreateLoginButtons implements Callable {
             message = Util.createMessage(Util.BUTTONS_LIST_SIZE, "A létrehozandó gombok száma!");
             message.obj = typesOfLoginButton.size();
 
+            Drawable vectorDrawable = null;
+            Drawable vectorDrawable1 = null;
+            Drawable vectorDrawable2 = null;
+            Drawable vectorDrawable3 = null;
+
             if(ctpmw != null && ctpmw.get() != null && message != null) {
                 ctpmw.get().sendResultToPresenter(message);
+            }
+
+            // át kell még majd nézni mert nem működik
+            if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.COMPACT){
+                margins = new int[] {10, 10, 10, 10};
+                width = 100;
+                height = 100;
+
+                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
+                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
+                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
+                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
+                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+            }
+            else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
+                margins = new int[] {15, 10, 15, 10};
+                width = 100;
+                height = 100;
+
+                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
+                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
+                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
+                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
+                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+            }
+            else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
+                margins = new int[] {30, 10, 30, 10};
+                width = 100;
+                height = 100;
+
+                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
+                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
+                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
+                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
+                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+            }
+            else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
+                margins = new int[] {10, 10, 10, 10};
+                width = 90;
+                height = 90;
+
+                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
+                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
+                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
+                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+
+                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
+                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
             }
 
             for (int i = 0; i < typesOfLoginButton.size(); i++) {
@@ -131,10 +210,10 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginAccAndPassButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_personalcard,
-                                margins = new int[]{10, 10, 10, 10},
-                                width = 100,
-                                height = 100
+                                vectorDrawable,
+                                margins,
+                                width,
+                                height
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Felhasználónév és jelszó gomb létrehozásának befejezése!");
@@ -152,10 +231,10 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginPinButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_keyboard,
-                                margins = new int[]{10, 10, 10, 10},
-                                width = 100,
-                                height = 100
+                                vectorDrawable1,
+                                margins,
+                                width,
+                                height
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Pinkód gomb létrehozásának befejezése!");
@@ -174,10 +253,10 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginRFIDButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_rfid,
-                                margins = new int[]{10, 10, 10, 10},
-                                width = 100,
-                                height = 100
+                                vectorDrawable2,
+                                margins,
+                                width,
+                                height
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "RFID gomb létrehozásának befejezése!");
@@ -196,10 +275,10 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginBarcodeButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_barcode,
-                                margins = new int[]{10, 10, 10, 10},
-                                width = 100,
-                                height = 100
+                                vectorDrawable3,
+                                margins,
+                                width,
+                                height
                         );
 
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Barcode gomb létrehozásának befejezése!");
@@ -229,10 +308,10 @@ public class CreateLoginButtons implements Callable {
         return null;
     }
 
-    private void setStyleForButton(ImageButton button, int backgroundId, int imageId, int[] margins, int width, int height) {
+    private void setStyleForButton(ImageButton button, int backgroundId, Drawable imageId, int[] margins, int width, int height) {
         if(button == null) return;
 
-        button.setImageResource(imageId);
+        button.setImageDrawable(imageId);
         button.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), backgroundId));
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width, height);

@@ -22,6 +22,10 @@ import hu.unideb.inf.devicelogon.fragments.pdafragments.BarcodeFragmentPDA;
 import hu.unideb.inf.devicelogon.fragments.pdafragments.PinCodeFragmentPDA;
 import hu.unideb.inf.devicelogon.fragments.pdafragments.RFIDFragmentPDA;
 import hu.unideb.inf.devicelogon.fragments.pdafragments.UserPassFragmentPDA;
+import hu.unideb.inf.devicelogon.fragments.tabletfragments.BarcodeFragmentTablet;
+import hu.unideb.inf.devicelogon.fragments.tabletfragments.PinCodeFragmentTablet;
+import hu.unideb.inf.devicelogon.fragments.tabletfragments.RFIDFragmentTablet;
+import hu.unideb.inf.devicelogon.fragments.tabletfragments.UserPassFragmentTablet;
 import hu.unideb.inf.devicelogon.interfaces.IFragmentNavigationPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
@@ -69,7 +73,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
         try {
             ApplicationLogger.logging(LogLevel.INFORMATION, "A bejelentkezési módok gombjainak létrehozása megkezdődött.");
 
-            CreateLoginButtons callable = new CreateLoginButtons(context.getApplicationContext(), modesNumber);
+            CreateLoginButtons callable = new CreateLoginButtons(context.getApplicationContext(), modesNumber, wsc);
             callable.setCustomThreadPoolManager(mCustomThreadPoolManager);
             mCustomThreadPoolManager.addCallableMethod(callable);
 
@@ -102,6 +106,16 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
                 case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new RFIDFragmentMobile()); break;
                 case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new PinCodeFragmentMobile()); break;
                 case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new BarcodeFragmentMobile()); break;
+            }
+        }
+        else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED ||
+                wsc[0] == WindowSizeClass.EXPANDED && wsc[1] == WindowSizeClass.MEDIUM){
+
+            switch (fragmentTypes){
+                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new UserPassFragmentTablet()); break;
+                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new RFIDFragmentTablet()); break;
+                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new PinCodeFragmentTablet()); break;
+                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new BarcodeFragmentTablet()); break;
             }
         }
         else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){

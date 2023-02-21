@@ -4,24 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.mobilefragments.BarcodeFragmentMobile">
+    tools:context=".fragments.mobilefragments.PinCodeFragmentMobile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/barcodeCL_mobile_landscape"
+        android:id="@+id/pincodeCL_tablet_landscape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/buttonsLayout4_mobile_landscape"
+            android:id="@+id/buttonsLayout3_tablet_landscape"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7_mobile_landscape">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5_tablet_landscape">
 
             <Button
-                android:id="@+id/loginButton4_mobile_landscape"
+                android:id="@+id/loginButton3_tablet_landscape"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
@@ -40,16 +42,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7_mobile_landscape"
+            android:id="@+id/constraintLayout5_tablet_landscape"
             android:layout_width="match_parent"
             android:layout_height="165dp"
+            android:layout_marginStart="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout8_mobile_landscape"
+                android:id="@+id/constraintLayout6_tablet_landscape"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:elevation="10dp"
@@ -59,12 +62,12 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView6_mobile_landscape"
+                    android:id="@+id/textView5_tablet_landscape"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="20dp"
-                    android:text="Vonalkód"
+                    android:text="PIN"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -72,16 +75,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editTextBarcode_mobile_landscape"
+                    android:id="@+id/editTextPinCode_tablet_landscape"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/email_background"
-                    android:drawableStart="@drawable/mini_barcode"
+                    android:drawableStart="@drawable/ic_baseline_vpn_key_24"
                     android:drawablePadding="20dp"
                     android:ems="10"
-                    android:hint="vonalkód"
+                    android:hint="pinkód"
                     android:inputType="textEmailAddress"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
@@ -89,7 +92,7 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6_mobile_landscape" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView5_tablet_landscape" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

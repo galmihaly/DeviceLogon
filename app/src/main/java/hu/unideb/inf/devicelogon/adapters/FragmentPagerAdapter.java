@@ -48,6 +48,14 @@ public class FragmentPagerAdapter extends FragmentStateAdapter {
         this.baseFragmentList.add(baseFragment);
     }
 
+    public void setCurrentButtonColorByPosition(int position){ Util.changeButtonColor(imageButtonList, position); }
+
+    public void addItemToHashMap(FragmentTypes fragmentTypes, BaseFragment baseFragment){ baseFragmentHashMap.put(fragmentTypes, baseFragment); }
+
+    public void addButtonToList(ImageButton imageButtons){
+        imageButtonList.add(imageButtons);
+    }
+
     public int setCurrentButtonColorByEnum(FragmentTypes fragmentTypes){
 
         for (Map.Entry<FragmentTypes, BaseFragment> entry : baseFragmentHashMap.entrySet()){
@@ -62,19 +70,6 @@ public class FragmentPagerAdapter extends FragmentStateAdapter {
                 break;
             }
         }
-
         return -1;
-    }
-
-    public void setCurrentButtonColorByPosition(int position){
-        Util.changeButtonColor(imageButtonList, position);
-    }
-
-    public void addItemToHashMap(FragmentTypes fragmentTypes, BaseFragment baseFragment){
-        baseFragmentHashMap.put(fragmentTypes, baseFragment);
-    }
-
-    public void addButtonToList(ImageButton imageButtons){
-        imageButtonList.add(imageButtons);
     }
 }

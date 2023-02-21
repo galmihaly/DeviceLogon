@@ -7,7 +7,7 @@
     tools:context=".MainActivityView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activityCL_mobile_landscape"
+        android:id="@+id/activityCL_tablet_landscape"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <ImageView
-            android:id="@+id/imageView3_mobile_landscape"
+            android:id="@+id/imageView3_tablet_landscape"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,34 +27,34 @@
             app:srcCompat="@drawable/ic_rajzt_bla_1" />
 
         <TextView
-            android:id="@+id/textView11_mobile_landscape"
+            android:id="@+id/textView11_tablet_landscape"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:text="Bejelentkezés"
             android:textColor="@color/black"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView3_tablet_landscape" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl10__mobile_landscape"
+            android:id="@+id/cl10_tablet_landscape"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11_mobile_landscape"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toBottomOf="@+id/textView11_tablet_landscape">
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/loginModesCL2_mobile_landscape"
+                android:id="@+id/loginModesCL2_tablet_landscape"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/loginModesButtonsCL2_mobile_landscape"
+                android:layout_marginTop="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/loginModesButtonsCL2_tablet_landscape"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -62,15 +62,15 @@
             </androidx.viewpager2.widget.ViewPager2>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/loginModesButtonsCL2_mobile_landscape"
+                android:id="@+id/loginModesButtonsCL2_tablet_landscape"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <LinearLayout
-                    android:id="@+id/cl2_mobile_landscape"
+                    android:id="@+id/cl2_tablet_landscape"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

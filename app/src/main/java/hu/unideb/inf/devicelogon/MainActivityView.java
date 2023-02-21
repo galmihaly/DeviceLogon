@@ -1,5 +1,6 @@
 package hu.unideb.inf.devicelogon;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
@@ -43,6 +44,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private int modesNumber;
     private int buttonsListSize;
     private FragmentPagerAdapter fragmentPagerAdapter;
+    private ViewPagerListener viewPagerListener = ViewPagerListener.getInstance();
 
     private LoginButtonListener loginButtonListener1 = new LoginButtonListener();
     private LoginButtonListener loginButtonListener2 = new LoginButtonListener();
@@ -57,7 +59,6 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         if(windowSizeClasses != null) {
             mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext(), windowSizeClasses);
             mainActivityPresenter.initTaskManager();
-            fragmentPagerAdapter = new FragmentPagerAdapter(this);
         }
 
         if(loginBarcodeButton == null || loginRFIDButton == null || loginPinButton == null || loginAccAndPassButton == null){
@@ -84,8 +85,6 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 Util.hideKeyboard(this);
             });
         }
-
-        ViewPagerListener viewPagerListener = ViewPagerListener.getInstance(fragmentPagerAdapter);
 
         if(loginModesCL1 != null) { loginModesCL1.registerOnPageChangeCallback(viewPagerListener); }
         if(loginModesCL2 != null) { loginModesCL2.registerOnPageChangeCallback(viewPagerListener); }
@@ -130,23 +129,13 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
         baseFragment.atachPresenter(mainActivityPresenter);
 
-        if(loginModesCL1 != null && fragmentPagerAdapter != null) {
-
-            fragmentPagerAdapter.addFragment(baseFragment);
-            fragmentPagerAdapter.addItemToHashMap(fragmentTypes, baseFragment);
-
-            // az adaptert a várható létrehozandó gombok száma alapján tesszük a ViewPager controllba
-            if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
-                loginModesCL1.setAdapter(fragmentPagerAdapter);
-            }
-        }
-        else if(loginModesCL2 != null && fragmentPagerAdapter != null){
-
+        if(fragmentPagerAdapter != null){
             fragmentPagerAdapter.addFragment(baseFragment);
             fragmentPagerAdapter.addItemToHashMap(fragmentTypes, baseFragment);
 
             if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
-                loginModesCL2.setAdapter(fragmentPagerAdapter);
+               if(loginModesCL1 != null)  loginModesCL1.setAdapter(fragmentPagerAdapter);
+               if(loginModesCL2 != null)  loginModesCL2.setAdapter(fragmentPagerAdapter);
             }
         }
     }
@@ -185,9 +174,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     }
 
     @Override
-    public void getButtonsListSize(int integer) {
-        buttonsListSize = integer;
-    }
+    public void getButtonsListSize(int integer) { buttonsListSize = integer; }
 
     private void initView(){
 
@@ -215,6 +202,16 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 activityCL = findViewById(R.id.activityCL_mobile_landscape);
             }
         }
+        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+            if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+                setContentView(R.layout.activity_main_tablet_landscape);
+                setTheme(R.style.DeviceLogon_landscape);
+                llay = findViewById(R.id.cl2_tablet_landscape);
+                loginModesCL2 = findViewById(R.id.loginModesCL2_tablet_landscape);
+                activityCL = findViewById(R.id.activityCL_tablet_landscape);
+            }
+        }
         else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
 
             setContentView(R.layout.activity_main_pda_portrait);
@@ -224,6 +221,9 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             loginModesCL1 = findViewById(R.id.loginModesCL1_pda_portrait);
             activityCL = findViewById(R.id.activityCL_pda_portrait);
         }
+
+        fragmentPagerAdapter = new FragmentPagerAdapter(this);
+        viewPagerListener.setFragmentPagerAdapter(fragmentPagerAdapter);
 
         Util.hideNavigationBar(this);
         Util.hideActionBar(this);

@@ -20,10 +20,10 @@ public class PinCodeFragmentMobile extends BaseFragment {
         int orientation = getResources().getConfiguration().orientation;
 
         if(orientation == Configuration.ORIENTATION_PORTRAIT) {
-            view = inflater.inflate(R.layout.fragment_pin_code_mobile_portrait, container, false);
+            view = inflater.inflate(R.layout.fragment_pincode_mobile_portrait, container, false);
         }
         else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            view = inflater.inflate(R.layout.fragment_pin_code_mobile_landscape, container, false);
+            view = inflater.inflate(R.layout.fragment_pincode_mobile_landscape, container, false);
         }
 
         return view;
