@@ -20,30 +20,20 @@
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main_mobile_landscape.xml" value="0.18802083333333333" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main_mobile_portrait.xml" value="0.18802083333333333" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main_pda_portrait.xml" value="0.18802083333333333" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main_tablet_landscape.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_barcode.xml" value="0.33" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_barcode_mobile_landscape.xml" value="0.36666666666666664" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_barcode_tablet_landscape.xml" value="0.22" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_pin_code.xml" value="0.27853260869565216" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_pin_code_mobile_landscape.xml" value="0.27853260869565216" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_pin_code_tablet_landscape.xml" value="0.27853260869565216" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_pincode_tablet_landscape.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_rfid.xml" value="0.33" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_rfid_mobile_landscape.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_rfid_mobile_portrait.xml" value="0.33" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_rfid_pda_portrait.xml" value="0.5" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_rfid_tablet_landscape.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password.xml" value="0.5" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password_landscape.xml" value="0.27853260869565216" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password_mobile_landscape.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password_mobile_portrait.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password_pda_portrait.xml" value="0.27853260869565216" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password_tablet_landscape.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main_mobile_landscape.xml" value="0.2" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main_mobile_portrait.xml" value="0.141015625" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main_pda_portrait.xml" value="0.18697916666666667" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main_tablet_landscape.xml" value="0.18802083333333333" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/circle.xml" value="0.2265" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/hungary_countryflag.xml" value="0.121" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/ic_brit.xml" value="0.2265" />
@@ -51,6 +41,7 @@
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/language_button_background.xml" value="0.2265" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/drawable/retry_button_background.xml" value="0.2265" />
         <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/activity_main.xml" value="0.536" />
+        <entry key="..\:/Munkahely_Programok/LoginApp/LoginApp/app/src/main/res/layout/startactivity_main_pda_portrait.xml" value="0.213768115942029" />
       </map>
     </option>
   </component>

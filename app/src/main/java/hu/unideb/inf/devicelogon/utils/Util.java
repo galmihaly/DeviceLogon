@@ -1,6 +1,7 @@
 package hu.unideb.inf.devicelogon.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
@@ -11,11 +12,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.window.layout.WindowMetrics;
 import androidx.window.layout.WindowMetricsCalculator;
 
 import java.util.List;
 
+import hu.unideb.inf.devicelogon.R;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 
 
@@ -110,11 +113,17 @@ public class Util {
         for (int i = 0; i < imageButtonList.size(); i++) {
             if(i != isActive){
                 imageButtonList.get(i).getBackground().setAlpha(60);
-                imageButtonList.get(i).setImageAlpha(40);
+                imageButtonList.get(i).setImageAlpha(60);
+
+                Drawable wrappedDrawable = DrawableCompat.wrap(imageButtonList.get(i).getDrawable());
+                DrawableCompat.setTint(wrappedDrawable, Color.GRAY);
             }
             else {
                 imageButtonList.get(i).getBackground().setAlpha(255);
                 imageButtonList.get(i).setImageAlpha(255);
+
+                Drawable wrappedDrawable = DrawableCompat.wrap(imageButtonList.get(i).getDrawable());
+                DrawableCompat.setTint(wrappedDrawable, Color.BLACK);
             }
         }
     }

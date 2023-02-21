@@ -1,6 +1,7 @@
 package hu.unideb.inf.devicelogon.tasks;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -126,74 +128,29 @@ public class CreateLoginButtons implements Callable {
                 ctpmw.get().sendResultToPresenter(message);
             }
 
-            // át kell még majd nézni mert nem működik
+            // mobile - portrait
             if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.COMPACT){
                 margins = new int[] {10, 10, 10, 10};
-                width = 100;
-                height = 100;
-
-                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
-                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
-                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
-                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
-                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+                width = 110;
+                height = 110;
             }
+            // mobile - landscape
             else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
                 margins = new int[] {15, 10, 15, 10};
-                width = 100;
-                height = 100;
-
-                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
-                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
-                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
-                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
-                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+                width = 110;
+                height = 110;
             }
+            // tablet - landscape
             else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
                 margins = new int[] {30, 10, 30, 10};
-                width = 100;
-                height = 100;
-
-                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
-                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
-                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
-                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
-                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+                width = 120;
+                height = 120;
             }
+            // pda - portrait
             else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
                 margins = new int[] {10, 10, 10, 10};
                 width = 90;
                 height = 90;
-
-                vectorDrawable = context.getDrawable(R.drawable.ic_personalcard);
-                vectorDrawable.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable1 = context.getDrawable(R.drawable.ic_keyboard);
-                vectorDrawable1.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable2 = context.getDrawable(R.drawable.ic_rfid);
-                vectorDrawable2.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-
-                vectorDrawable3 = context.getDrawable(R.drawable.ic_barcode);
-                vectorDrawable3.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
             }
 
             for (int i = 0; i < typesOfLoginButton.size(); i++) {
@@ -210,7 +167,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginAccAndPassButton,
                                 R.drawable.circle_background,
-                                vectorDrawable,
+                                R.drawable.ic_personalcard,
                                 margins,
                                 width,
                                 height
@@ -231,7 +188,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginPinButton,
                                 R.drawable.circle_background,
-                                vectorDrawable1,
+                                R.drawable.ic_keyboard,
                                 margins,
                                 width,
                                 height
@@ -253,7 +210,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginRFIDButton,
                                 R.drawable.circle_background,
-                                vectorDrawable2,
+                                R.drawable.ic_rfid,
                                 margins,
                                 width,
                                 height
@@ -275,7 +232,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginBarcodeButton,
                                 R.drawable.circle_background,
-                                vectorDrawable3,
+                                R.drawable.ic_barcode,
                                 margins,
                                 width,
                                 height
@@ -308,10 +265,10 @@ public class CreateLoginButtons implements Callable {
         return null;
     }
 
-    private void setStyleForButton(ImageButton button, int backgroundId, Drawable imageId, int[] margins, int width, int height) {
+    private void setStyleForButton(ImageButton button, int backgroundId, int imageId, int[] margins, int width, int height) {
         if(button == null) return;
 
-        button.setImageDrawable(imageId);
+        button.setImageResource(imageId);
         button.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), backgroundId));
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width, height);
@@ -319,6 +276,4 @@ public class CreateLoginButtons implements Callable {
 
         button.setLayoutParams(lp);
     }
-
-
 }
