@@ -39,13 +39,13 @@ public class BarcodeFragmentMobile extends BaseFragment implements IBarcodeFragm
             button = view.findViewById(R.id.loginButton4_mobile_landscape);
         }
 
-        wsc[1]  = (WindowSizeClass) getArguments().getSerializable("windowHeight");
-        wsc[2] =  (WindowSizeClass) getArguments().getSerializable("windowWidth");
+        wsc[0]  = (WindowSizeClass) getArguments().getSerializable("windowHeightEnum");
+        wsc[1] =  (WindowSizeClass) getArguments().getSerializable("windowWidthEnum");
 
-        Log.e("height", String.valueOf(wsc[1]));
-        Log.e("width", String.valueOf(wsc[2]));
+        Log.e("height", String.valueOf(wsc[0]));
+        Log.e("width", String.valueOf(wsc[1]));
 
-        //barcodeFragmentPresenter = new BarcodeFragmentPresenter(this, getContext(), wsc);
+        barcodeFragmentPresenter = new BarcodeFragmentPresenter(this, getContext(), wsc);
 
         return view;
     }
@@ -55,11 +55,8 @@ public class BarcodeFragmentMobile extends BaseFragment implements IBarcodeFragm
         super.onResume();
 
         if(button != null){
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
+            button.setOnClickListener(view -> {
+                barcodeFragmentPresenter.addFragment();
             });
         }
     }

@@ -16,7 +16,7 @@ import hu.unideb.inf.devicelogon.adapters.models.OrderItem;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.utils.Util;
 
-public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter {
+public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<OrderItemsViewHolderAdapter.OrderItemsViewHolder> {
 
     private Context context;
     private WindowSizeClass[] windowSizeClasses;
@@ -30,19 +30,19 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.orderitem_layout, parent, false);
+    public OrderItemsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
 
         return new OrderItemsViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderItemsViewHolder holder, int position) {
         OrderItem orderItem = orderItemList.get(position);
 
         if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
 
-            ((OrderItemsViewHolder) holder).textView.setText(orderItem.getText1());
+            holder.getTextView().setText(orderItemList.get(position).getText1());
         }
     }
 
@@ -50,10 +50,10 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return orderItemList.size();
     }
 
-    private static class OrderItemsViewHolder extends RecyclerView.ViewHolder{
+    public static class OrderItemsViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textView;
 

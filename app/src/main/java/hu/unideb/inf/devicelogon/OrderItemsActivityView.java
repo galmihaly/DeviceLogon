@@ -1,10 +1,13 @@
 package hu.unideb.inf.devicelogon;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -22,12 +25,17 @@ public class OrderItemsActivityView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orderitems_mobile_landscape);
+        initView();
 
         ArrayList<OrderItem> orderItemArrayList = new ArrayList<>();
         orderItemArrayList.add(new OrderItem("kenyér", "héja"));
 
         OrderItemsViewHolderAdapter orderItemAdapter = new OrderItemsViewHolderAdapter(this, windowSizeClasses, orderItemArrayList);
+
+        if(recyclerView != null){
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(orderItemAdapter);
+        }
     }
 
     private void initView(){

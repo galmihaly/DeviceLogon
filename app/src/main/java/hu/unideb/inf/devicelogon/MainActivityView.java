@@ -128,10 +128,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         if(baseFragment == null) return;
 
         baseFragment.atachPresenter(mainActivityPresenter);
-        Bundle bundle = Util.sendDisplaySizesToFragments(windowSizeClasses);
-        baseFragment.setArguments(bundle);
-
-        Util.sendDisplaySizesToFragments(windowSizeClasses);
+        Util.sendDisplaySizesToFragments(baseFragment, windowSizeClasses);
 
         if(fragmentPagerAdapter != null){
             fragmentPagerAdapter.addFragment(baseFragment);

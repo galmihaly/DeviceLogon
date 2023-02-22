@@ -18,6 +18,7 @@ import androidx.window.layout.WindowMetricsCalculator;
 import java.util.List;
 
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
+import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 
 
 public class Util {
@@ -126,10 +127,11 @@ public class Util {
         }
     }
 
-    public static Bundle sendDisplaySizesToFragments(WindowSizeClass[] windowSizeClasses) {
+    public static void sendDisplaySizesToFragments(BaseFragment baseFragment, WindowSizeClass[] windowSizeClasses) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("windowHeightEnum", windowSizeClasses[0]);
         bundle.putSerializable("windowWidthEnum", windowSizeClasses[1]);
-        return bundle;
+
+        baseFragment.setArguments(bundle);
     }
 }
