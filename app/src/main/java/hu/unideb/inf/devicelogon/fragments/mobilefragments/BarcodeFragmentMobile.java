@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class BarcodeFragmentMobile extends BaseFragment implements IBarcodeFragm
     private View view;
     private Button button;
     private BarcodeFragmentPresenter barcodeFragmentPresenter;
-    private WindowSizeClass[] wsc;
+    private WindowSizeClass[] wsc = new WindowSizeClass[2];
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +39,13 @@ public class BarcodeFragmentMobile extends BaseFragment implements IBarcodeFragm
             button = view.findViewById(R.id.loginButton4_mobile_landscape);
         }
 
+        wsc[1]  = (WindowSizeClass) getArguments().getSerializable("windowHeight");
+        wsc[2] =  (WindowSizeClass) getArguments().getSerializable("windowWidth");
 
-        barcodeFragmentPresenter = new BarcodeFragmentPresenter(this, getContext(), );
+        Log.e("height", String.valueOf(wsc[1]));
+        Log.e("width", String.valueOf(wsc[2]));
+
+        //barcodeFragmentPresenter = new BarcodeFragmentPresenter(this, getContext(), wsc);
 
         return view;
     }
