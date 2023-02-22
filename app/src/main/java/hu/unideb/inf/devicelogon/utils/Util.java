@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -18,7 +17,6 @@ import androidx.window.layout.WindowMetricsCalculator;
 
 import java.util.List;
 
-import hu.unideb.inf.devicelogon.R;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 
 
@@ -126,5 +124,12 @@ public class Util {
                 DrawableCompat.setTint(wrappedDrawable, Color.BLACK);
             }
         }
+    }
+
+    public static Bundle sendDisplaySizesToFragments(WindowSizeClass[] windowSizeClasses) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("windowHeightEnum", windowSizeClasses[0]);
+        bundle.putSerializable("windowWidthEnum", windowSizeClasses[1]);
+        return bundle;
     }
 }

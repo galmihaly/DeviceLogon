@@ -128,6 +128,10 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         if(baseFragment == null) return;
 
         baseFragment.atachPresenter(mainActivityPresenter);
+        Bundle bundle = Util.sendDisplaySizesToFragments(windowSizeClasses);
+        baseFragment.setArguments(bundle);
+
+        Util.sendDisplaySizesToFragments(windowSizeClasses);
 
         if(fragmentPagerAdapter != null){
             fragmentPagerAdapter.addFragment(baseFragment);
@@ -220,12 +224,12 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             llay = findViewById(R.id.cl_pda_portrait);
             loginModesCL1 = findViewById(R.id.loginModesCL1_pda_portrait);
             activityCL = findViewById(R.id.activityCL_pda_portrait);
+
+            Util.hideNavigationBar(this);
+            Util.hideActionBar(this);
         }
 
         fragmentPagerAdapter = new FragmentPagerAdapter(this);
         viewPagerListener.setFragmentPagerAdapter(fragmentPagerAdapter);
-
-        Util.hideNavigationBar(this);
-        Util.hideActionBar(this);
     }
 }

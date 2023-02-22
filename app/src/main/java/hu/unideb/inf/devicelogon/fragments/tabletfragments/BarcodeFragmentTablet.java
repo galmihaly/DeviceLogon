@@ -1,5 +1,6 @@
 package hu.unideb.inf.devicelogon.fragments.tabletfragments;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +9,9 @@ import android.view.ViewGroup;
 
 import hu.unideb.inf.devicelogon.R;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
+import hu.unideb.inf.devicelogon.fragments.fragmentinterfaces.IBarcodeFragmentView;
 
-public class BarcodeFragmentTablet extends BaseFragment {
+public class BarcodeFragmentTablet extends BaseFragment implements IBarcodeFragmentView {
 
     private View view;
 
@@ -26,5 +28,11 @@ public class BarcodeFragmentTablet extends BaseFragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void loadOtherActivityPages(Intent intent) {
+        if(intent == null) return;
+        startActivity(intent);
     }
 }

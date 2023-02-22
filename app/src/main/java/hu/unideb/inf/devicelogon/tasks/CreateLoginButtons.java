@@ -1,9 +1,12 @@
 package hu.unideb.inf.devicelogon.tasks;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Message;
 import android.widget.ImageButton;
@@ -43,6 +46,10 @@ public class CreateLoginButtons implements Callable {
     private int height;
     private int width;
     private int[] margins;
+    private int imageUserPassId;
+    private int imageRFIDId;
+    private int imageBarcodeId;
+    private int imagePincodeId;
 
     //Message
     private Message message;
@@ -119,11 +126,6 @@ public class CreateLoginButtons implements Callable {
             message = Util.createMessage(Util.BUTTONS_LIST_SIZE, "A létrehozandó gombok száma!");
             message.obj = typesOfLoginButton.size();
 
-            Drawable vectorDrawable = null;
-            Drawable vectorDrawable1 = null;
-            Drawable vectorDrawable2 = null;
-            Drawable vectorDrawable3 = null;
-
             if(ctpmw != null && ctpmw.get() != null && message != null) {
                 ctpmw.get().sendResultToPresenter(message);
             }
@@ -133,24 +135,40 @@ public class CreateLoginButtons implements Callable {
                 margins = new int[] {10, 10, 10, 10};
                 width = 110;
                 height = 110;
+                imagePincodeId = R.drawable.ic_keyboard;
+                imageRFIDId = R.drawable.ic_rfid;
+                imageUserPassId = R.drawable.ic_personalcard;
+                imageBarcodeId = R.drawable.ic_barcode;
             }
             // mobile - landscape
             else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
                 margins = new int[] {15, 10, 15, 10};
                 width = 110;
                 height = 110;
+                imagePincodeId = R.drawable.ic_keyboard;
+                imageRFIDId = R.drawable.ic_rfid;
+                imageUserPassId = R.drawable.ic_personalcard;
+                imageBarcodeId = R.drawable.ic_barcode;
             }
             // tablet - landscape
             else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
                 margins = new int[] {30, 10, 30, 10};
                 width = 120;
                 height = 120;
+                imagePincodeId = R.drawable.ic_keyboard;
+                imageRFIDId = R.drawable.ic_rfid;
+                imageUserPassId = R.drawable.ic_personalcard;
+                imageBarcodeId = R.drawable.ic_barcode;
             }
             // pda - portrait
             else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
                 margins = new int[] {10, 10, 10, 10};
                 width = 90;
                 height = 90;
+                imagePincodeId = R.drawable.mini_keyboard;
+                imageRFIDId = R.drawable.mini_rfid;
+                imageUserPassId = R.drawable.mini_personalcard;
+                imageBarcodeId = R.drawable.mini_barcode;
             }
 
             for (int i = 0; i < typesOfLoginButton.size(); i++) {
@@ -167,7 +185,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginAccAndPassButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_personalcard,
+                                imageUserPassId,
                                 margins,
                                 width,
                                 height
@@ -188,7 +206,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginPinButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_keyboard,
+                                imagePincodeId,
                                 margins,
                                 width,
                                 height
@@ -210,7 +228,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginRFIDButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_rfid,
+                                imageRFIDId,
                                 margins,
                                 width,
                                 height
@@ -232,7 +250,7 @@ public class CreateLoginButtons implements Callable {
                         setStyleForButton(
                                 loginBarcodeButton,
                                 R.drawable.circle_background,
-                                R.drawable.ic_barcode,
+                                imageBarcodeId,
                                 margins,
                                 width,
                                 height
@@ -245,7 +263,7 @@ public class CreateLoginButtons implements Callable {
 
                         break;
                     }
-                    case 16:{ // meg kell kérdezni ezzel kapcsolatban Imit
+                    case 16:{
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Felhasználónév és jelszó gomb létrehozásának elindítása!");
                         ApplicationLogger.logging(LogLevel.INFORMATION, "Felhasználónév és jelszó gomb létrehozásának befejezése!");
                     }
