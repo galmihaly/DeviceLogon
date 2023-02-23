@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.widget.ImageButton;
 
 import java.lang.ref.WeakReference;
@@ -14,18 +13,7 @@ import java.util.List;
 import hu.unideb.inf.devicelogon.enums.FragmentTypes;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
-import hu.unideb.inf.devicelogon.fragments.mobilefragments.BarcodeFragmentMobile;
-import hu.unideb.inf.devicelogon.fragments.mobilefragments.PinCodeFragmentMobile;
-import hu.unideb.inf.devicelogon.fragments.mobilefragments.RFIDFragmentMobile;
-import hu.unideb.inf.devicelogon.fragments.mobilefragments.UserPassFragmentMobile;
-import hu.unideb.inf.devicelogon.fragments.pdafragments.BarcodeFragmentPDA;
-import hu.unideb.inf.devicelogon.fragments.pdafragments.PinCodeFragmentPDA;
-import hu.unideb.inf.devicelogon.fragments.pdafragments.RFIDFragmentPDA;
-import hu.unideb.inf.devicelogon.fragments.pdafragments.UserPassFragmentPDA;
-import hu.unideb.inf.devicelogon.fragments.tabletfragments.BarcodeFragmentTablet;
-import hu.unideb.inf.devicelogon.fragments.tabletfragments.PinCodeFragmentTablet;
-import hu.unideb.inf.devicelogon.fragments.tabletfragments.RFIDFragmentTablet;
-import hu.unideb.inf.devicelogon.fragments.tabletfragments.UserPassFragmentTablet;
+import hu.unideb.inf.devicelogon.fragments.LoginFragment;
 import hu.unideb.inf.devicelogon.interfaces.IFragmentNavigationPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
@@ -98,35 +86,7 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
     @Override
     public void addFragmentByEnum(FragmentTypes fragmentTypes) {
 
-        if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.COMPACT ||
-                wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
-
-            switch (fragmentTypes){
-                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new UserPassFragmentMobile()); break;
-                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new RFIDFragmentMobile()); break;
-                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new PinCodeFragmentMobile()); break;
-                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new BarcodeFragmentMobile()); break;
-            }
-        }
-        else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED ||
-                wsc[0] == WindowSizeClass.EXPANDED && wsc[1] == WindowSizeClass.MEDIUM){
-
-            switch (fragmentTypes){
-                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new UserPassFragmentTablet()); break;
-                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new RFIDFragmentTablet()); break;
-                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new PinCodeFragmentTablet()); break;
-                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new BarcodeFragmentTablet()); break;
-            }
-        }
-        else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
-
-            switch (fragmentTypes){
-                case USERPASSFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new UserPassFragmentPDA()); break;
-                case RFIDFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new RFIDFragmentPDA()); break;
-                case PINCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new PinCodeFragmentPDA()); break;
-                case BARCODEFRAGMENT: iMainActivityView.loadOtherActivityFragment(fragmentTypes, new BarcodeFragmentPDA()); break;
-            }
-        }
+        iMainActivityView.loadOtherActivityFragment(fragmentTypes, new LoginFragment());
     }
 
     @Override

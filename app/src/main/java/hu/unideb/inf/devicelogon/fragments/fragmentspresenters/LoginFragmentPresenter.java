@@ -10,23 +10,23 @@ import java.lang.ref.WeakReference;
 
 import hu.unideb.inf.devicelogon.OrderItemsActivityView;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
-import hu.unideb.inf.devicelogon.fragments.fragmentinterfaces.IPincodeFragmentPresenter;
-import hu.unideb.inf.devicelogon.fragments.fragmentinterfaces.IPinCodeFragmentView;
+import hu.unideb.inf.devicelogon.fragments.fragmentinterfaces.ILoginFragment;
+import hu.unideb.inf.devicelogon.fragments.fragmentinterfaces.ILoginFragmentPresenter;
 import hu.unideb.inf.devicelogon.logger.ApplicationLogger;
 import hu.unideb.inf.devicelogon.logger.LogLevel;
 import hu.unideb.inf.devicelogon.tasksmanager.CustomThreadPoolManager;
 import hu.unideb.inf.devicelogon.tasksmanager.PresenterThreadCallback;
 
-public class PincodeFragmentPresenter implements IPincodeFragmentPresenter, PresenterThreadCallback {
+public class LoginFragmentPresenter implements ILoginFragmentPresenter, PresenterThreadCallback {
 
-    private IPinCodeFragmentView iPinCodeFragmentView;
+    private ILoginFragment iLoginFragment;
     private Context context;
     private CustomThreadPoolManager mCustomThreadPoolManager;
-    private PincodeFragmentHandler pincodeFragmentHandler;
+    private LoginFragmentHandler loginFragmentHandler;
     private WindowSizeClass[] wsc;
 
-    public PincodeFragmentPresenter(IPinCodeFragmentView iPinCodeFragmentView, Context context, WindowSizeClass[] wsc) {
-        this.iPinCodeFragmentView = iPinCodeFragmentView;
+    public LoginFragmentPresenter(ILoginFragment iLoginFragment, Context context, WindowSizeClass[] wsc) {
+        this.iLoginFragment = iLoginFragment;
         this.context = context;
         this.wsc = wsc;
     }
@@ -36,7 +36,7 @@ public class PincodeFragmentPresenter implements IPincodeFragmentPresenter, Pres
         try {
             ApplicationLogger.logging(LogLevel.INFORMATION, "A feladatkezelő létrehozása megkezdődött.");
 
-            pincodeFragmentHandler = new PincodeFragmentHandler(Looper.myLooper(), this);
+            loginFragmentHandler = new LoginFragmentHandler(Looper.myLooper(), this);
             mCustomThreadPoolManager = CustomThreadPoolManager.getsInstance();
             mCustomThreadPoolManager.setPresenterCallback(this);
 
@@ -50,23 +50,22 @@ public class PincodeFragmentPresenter implements IPincodeFragmentPresenter, Pres
     @Override
     public void addFragment() {
         Intent intent= new Intent(context.getApplicationContext(), OrderItemsActivityView.class);
-        iPinCodeFragmentView.loadOtherActivityPages(intent);
+        iLoginFragment.loadOtherActivityPages(intent);
     }
 
     @Override
     public void sendResultToPresenter(Message message) {
-        if(pincodeFragmentHandler == null) return;
-        pincodeFragmentHandler.sendMessage(message);
+        if(loginFragmentHandler == null) return;
+        loginFragmentHandler.sendMessage(message);
     }
 
+    private static class LoginFragmentHandler extends Handler {
 
-    private static class PincodeFragmentHandler extends Handler {
+        private WeakReference<ILoginFragmentPresenter> iLoginFragmentPresenterWeakReference;
 
-        private WeakReference<IPincodeFragmentPresenter> iLoginFragmentsPresenterWeakReference;
-
-        public PincodeFragmentHandler(Looper looper, IPincodeFragmentPresenter iPincodeFragmentPresenter) {
+        public LoginFragmentHandler(Looper looper, ILoginFragmentPresenter iLoginFragmentPresenter) {
             super(looper);
-            this.iLoginFragmentsPresenterWeakReference = new WeakReference<>(iPincodeFragmentPresenter);
+            this.iLoginFragmentPresenterWeakReference = new WeakReference<>(iLoginFragmentPresenter);
         }
 
         // Ui-ra szánt üzenetet kezelejük itt
@@ -79,4 +78,5 @@ public class PincodeFragmentPresenter implements IPincodeFragmentPresenter, Pres
             }
         }
     }
+
 }

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import hu.unideb.inf.devicelogon.adapters.FragmentPagerAdapter;
 import hu.unideb.inf.devicelogon.adapters.OrderItemsViewHolderAdapter;
 import hu.unideb.inf.devicelogon.adapters.models.OrderItem;
+import hu.unideb.inf.devicelogon.enums.OrderItemViewType;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.utils.Util;
 
@@ -22,15 +24,22 @@ public class OrderItemsActivityView extends AppCompatActivity {
     private WindowSizeClass[] windowSizeClasses;
     private RecyclerView recyclerView;
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
 
         ArrayList<OrderItem> orderItemArrayList = new ArrayList<>();
-        orderItemArrayList.add(new OrderItem("kenyér", "héja"));
+        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1, "szöveg1", "héja"));
+        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg2", "héja"));
+        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg3", "héja"));
+        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg4", "héja"));
+        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg5", "héja"));
+        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg6", "héja"));
 
         OrderItemsViewHolderAdapter orderItemAdapter = new OrderItemsViewHolderAdapter(this, windowSizeClasses, orderItemArrayList);
+        orderItemAdapter.notifyDataSetChanged();
 
         if(recyclerView != null){
             recyclerView.setLayoutManager(new LinearLayoutManager(this));

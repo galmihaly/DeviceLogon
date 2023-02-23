@@ -2,6 +2,6 @@ package hu.unideb.inf.devicelogon.fragments.fragmentinterfaces;
 
 import android.content.Intent;
 
-public interface IRFIDFragmentView {
+public interface ILoginFragment {
     void loadOtherActivityPages(Intent intent);
 }

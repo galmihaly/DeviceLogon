@@ -1,13 +1,28 @@
 package hu.unideb.inf.devicelogon.adapters.models;
 
+import hu.unideb.inf.devicelogon.enums.OrderItemViewType;
+
 public class OrderItem {
 
+    public static final int TYPE1 = 0;
+    public static final int TYPE2 = 1;
+
+    private int type;
     private String text1;
     private String text2;
 
-    public OrderItem(String text1, String text2) {
+    public OrderItem(int type, String text1, String text2) {
+        this.type = type;
         this.text1 = text1;
         this.text2 = text2;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getText1() {
