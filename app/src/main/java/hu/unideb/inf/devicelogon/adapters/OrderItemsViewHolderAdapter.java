@@ -41,10 +41,38 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
         View v = null;
 
         if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+            switch (viewType){
+                case OrderItem.TYPE1:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
 
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder(v);
+
+                }
+                case OrderItem.TYPE2:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder2(v);
+                }
+            }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+            switch (viewType){
+                case OrderItem.TYPE1:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
 
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder(v);
+
+                }
+                case OrderItem.TYPE2:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder2(v);
+                }
+            }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
             switch (viewType){
