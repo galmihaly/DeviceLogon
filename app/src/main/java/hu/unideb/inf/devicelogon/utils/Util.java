@@ -17,6 +17,7 @@ import androidx.window.layout.WindowMetricsCalculator;
 
 import java.util.List;
 
+import hu.unideb.inf.devicelogon.enums.CreateOrderItemsResponseEnums;
 import hu.unideb.inf.devicelogon.enums.FragmentTypes;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.fragments.BaseFragment;
@@ -25,6 +26,8 @@ import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 public class Util {
 
     public static final String MESSAGE_BODY = "MESSAGE_BODY";
+
+    //TODO : -> ezt majd át kell szervezni, úgy hogy számok helyett enumokat lehessen használni
 
     //Buttons created enums
     public static final int BUTTONS_IS_CREATED = 1;
@@ -38,6 +41,10 @@ public class Util {
 
     // Size of Buttons List
     public static final int BUTTONS_LIST_SIZE = 100;
+
+    // CreateOrderItemsResponseEnums
+    public static final int ADAPTER_CREATED_SUCCES = 20;
+    public static final int ADAPTER_CREATED_FAILED = 21;
 
     public static Message createMessage(int id, String dataString) {
         Bundle bundle = new Bundle();

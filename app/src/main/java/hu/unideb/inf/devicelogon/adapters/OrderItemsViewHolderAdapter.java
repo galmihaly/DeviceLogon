@@ -40,21 +40,45 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
 
         View v = null;
 
-        switch (viewType){
-            case OrderItem.TYPE1:{
-                v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
-                Log.e("sada", "as");
+        if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
 
-                if(v == null) return null;
-                return new OrderItemsViewHolder(v);
+        }
+        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
 
+        }
+        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+            switch (viewType){
+                case OrderItem.TYPE1:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
+
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder(v);
+
+                }
+                case OrderItem.TYPE2:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder2(v);
+                }
             }
-            case OrderItem.TYPE2:{
-                v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
-                Log.e("sadddfdfgdfga", "ashjkléhjűkhéj");
+        }
+        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
 
-                if(v == null) return null;
-                return new OrderItemsViewHolder2(v);
+            switch (viewType){
+                case OrderItem.TYPE1:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
+
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder(v);
+
+                }
+                case OrderItem.TYPE2:{
+                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+
+                    if(v == null) return null;
+                    return new OrderItemsViewHolder2(v);
+                }
             }
         }
 
@@ -66,73 +90,32 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         OrderItem orderItem = orderItemList.get(position);
 
-        if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-            ((OrderItemsViewHolder)holder).getTextView().setText(orderItemList.get(position).getText1());
-        }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+        if(position != RecyclerView.NO_POSITION){
+            switch (orderItem.getType()){
+                case OrderItem.TYPE1:{
+                    ((OrderItemsViewHolder)holder).getTextView().setText(orderItem.getText1());
 
-            ((OrderItemsViewHolder)holder).getTextView().setText(orderItemList.get(position).getText1());
-        }
-        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
-            if(position != RecyclerView.NO_POSITION){
-                switch (orderItem.getType()){
-                    case OrderItem.TYPE1:{
-                        ((OrderItemsViewHolder)holder).getTextView().setText(orderItem.getText1());
+                    ((OrderItemsViewHolder)holder).cl.setOnClickListener(view -> {
+                        if (position == selectedPosition) {
+                            return;
+                        }
+                        int currentSelected = selectedPosition;
+                        selectedPosition = position;
 
-                        ((OrderItemsViewHolder)holder).cl.setOnClickListener(view -> {
-                            if (position == selectedPosition) {
-                                return;
-                            }
-                            int currentSelected = selectedPosition;
-                            selectedPosition = position;
+                        if (currentSelected != -1) {
+                            orderItemList.get(currentSelected).setType(OrderItem.TYPE1);
+                            notifyItemChanged(currentSelected);// Deselected the previous item.
+                        }
+                        orderItem.setType(OrderItem.TYPE2);
+                        notifyItemChanged(selectedPosition);
+                    });
 
-                            if (currentSelected != -1) {
-                                orderItemList.get(currentSelected).setType(OrderItem.TYPE1);
-                                notifyItemChanged(currentSelected);// Deselected the previous item.
-                            }
-                            orderItem.setType(OrderItem.TYPE2);
-                            notifyItemChanged(selectedPosition);
-                        });
-
-                        break;
-                    }
-                    case OrderItem.TYPE2:{
-                        ((OrderItemsViewHolder2)holder).getTextView().setText(orderItem.getText1());
-                        ((OrderItemsViewHolder2)holder).getTextView2().setText(orderItem.getText2());
-                        break;
-                    }
+                    break;
                 }
-            }
-        }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-
-            if(position != RecyclerView.NO_POSITION){
-                switch (orderItem.getType()){
-                    case OrderItem.TYPE1:{
-                        ((OrderItemsViewHolder)holder).getTextView().setText(orderItem.getText1());
-
-                        ((OrderItemsViewHolder)holder).cl.setOnClickListener(view -> {
-                            if (position == selectedPosition) {
-                                return;
-                            }
-                            int currentSelected = selectedPosition;
-                            selectedPosition = position;
-
-                            if (currentSelected != -1) {
-                                orderItemList.get(currentSelected).setType(OrderItem.TYPE1);
-                                notifyItemChanged(currentSelected);// Deselected the previous item.
-                            }
-                            orderItem.setType(OrderItem.TYPE2);
-                            notifyItemChanged(selectedPosition);
-                        });
-
-                        break;
-                    }
-                    case OrderItem.TYPE2:{
-                        ((OrderItemsViewHolder2)holder).getTextView().setText(orderItem.getText1());
-                        ((OrderItemsViewHolder2)holder).getTextView2().setText(orderItem.getText2());
-                        break;
-                    }
+                case OrderItem.TYPE2:{
+                    ((OrderItemsViewHolder2)holder).getTextView().setText(orderItem.getText1());
+                    ((OrderItemsViewHolder2)holder).getTextView2().setText(orderItem.getText2());
+                    break;
                 }
             }
         }

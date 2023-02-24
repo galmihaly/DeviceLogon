@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/button_background.xml" value="0.2985" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/circle.xml" value="0.196" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/circle_background.xml" value="0.196" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/email_background.xml" value="0.2985" />
@@ -21,6 +22,8 @@
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/mini_keyboard.xml" value="0.2985" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/mini_personalcard.xml" value="0.2985" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/mini_rfid.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/orderitem_background.xml" value="0.2985" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/drawable/viewbutton_background.xml" value="0.2985" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main_landscape.xml" value="0.1591710758377425" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/activity_main_mobile_landscape.xml" value="0.18802083333333333" />
@@ -55,7 +58,7 @@
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/fragment_user_and_password_tablet_landscape.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/little_order_item.xml" value="0.27853260869565216" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/orderitem_layout.xml" value="0.5" />
-        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/orderitem_layout2.xml" value="0.67" />
+        <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/orderitem_layout2.xml" value="0.33" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main_mobile_landscape.xml" value="0.2" />
         <entry key="..\:/Munka/DeviceLogon/DeviceLogon/DeviceLogon/app/src/main/res/layout/startactivity_main_mobile_portrait.xml" value="0.141015625" />

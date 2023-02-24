@@ -1,28 +1,25 @@
 package hu.unideb.inf.devicelogon;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 
-import java.util.ArrayList;
-
-import hu.unideb.inf.devicelogon.adapters.FragmentPagerAdapter;
 import hu.unideb.inf.devicelogon.adapters.OrderItemsViewHolderAdapter;
-import hu.unideb.inf.devicelogon.adapters.models.OrderItem;
-import hu.unideb.inf.devicelogon.enums.OrderItemViewType;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
+import hu.unideb.inf.devicelogon.interfaces.IOrderItemsActivityView;
+import hu.unideb.inf.devicelogon.presenters.OrderItemsActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
 
-public class OrderItemsActivityView extends AppCompatActivity {
+public class OrderItemsActivityView extends AppCompatActivity implements IOrderItemsActivityView {
 
-    private WindowSizeClass[] windowSizeClasses;
+    private WindowSizeClass[] wsc;
     private RecyclerView recyclerView;
+    private OrderItemsActivityPresenter orderItemsActivityPresenter;
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
@@ -30,29 +27,16 @@ public class OrderItemsActivityView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         initView();
 
-        ArrayList<OrderItem> orderItemArrayList = new ArrayList<>();
-        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1, "szöveg1", "héja"));
-        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg2", "héja"));
-        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg3", "héja"));
-        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg4", "héja"));
-        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg5", "héja"));
-        orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"szöveg6", "héja"));
-
-        OrderItemsViewHolderAdapter orderItemAdapter = new OrderItemsViewHolderAdapter(this, windowSizeClasses, orderItemArrayList);
-        orderItemAdapter.notifyDataSetChanged();
-
-        if(recyclerView != null){
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(orderItemAdapter);
-        }
+        orderItemsActivityPresenter = new OrderItemsActivityPresenter(this, getApplicationContext(), wsc);
+        orderItemsActivityPresenter.initOrderItemsView();
     }
 
     private void initView(){
 
-        windowSizeClasses = Util.computeWindowSizeClasses(this);
+        wsc = Util.computeWindowSizeClasses(this);
         int orientation = this.getResources().getConfiguration().orientation;
 
-        if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+        if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.COMPACT){
             if(orientation == Configuration.ORIENTATION_PORTRAIT){
 
                 setContentView(R.layout.activity_orderitems_mobile_portrait);
@@ -60,7 +44,7 @@ public class OrderItemsActivityView extends AppCompatActivity {
                 recyclerView = findViewById(R.id.orderItemsList_mobile_portrait);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+        else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
 
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
@@ -69,7 +53,7 @@ public class OrderItemsActivityView extends AppCompatActivity {
                 recyclerView = findViewById(R.id.orderItemsList_mobile_landscape);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+        else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
                 setContentView(R.layout.activity_orderitems_tablet_landscape);
@@ -77,7 +61,7 @@ public class OrderItemsActivityView extends AppCompatActivity {
                 recyclerView = findViewById(R.id.orderItemsList_tablet_landscape);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+        else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
 
             setContentView(R.layout.activity_orderitems_pda_portrait);
             setTheme(R.style.DeviceLogon_portrait);
@@ -85,6 +69,22 @@ public class OrderItemsActivityView extends AppCompatActivity {
 
             Util.hideNavigationBar(this);
             Util.hideActionBar(this);
+        }
+    }
+
+    @Override
+    public void loadOtherActivityPages(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void bindAdapterToView(OrderItemsViewHolderAdapter adapter) {
+        if(adapter == null) return;
+        if(orderItemsActivityPresenter == null) return;
+
+        if(recyclerView != null){
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
         }
     }
 }

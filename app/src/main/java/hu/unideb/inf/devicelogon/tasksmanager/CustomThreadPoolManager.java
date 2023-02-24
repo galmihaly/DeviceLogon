@@ -39,7 +39,7 @@ public class CustomThreadPoolManager {
     private CustomThreadPoolManager() {
         mTaskQueue = new LinkedBlockingQueue<>();
         mRunningTaskList = new ArrayList<>();
-        mExecutorService = new ThreadPoolExecutor(NUMBER_OF_CORES, NUMBER_OF_CORES*2, KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, mTaskQueue, new BackgroundThreadFactory());
+        mExecutorService = new ThreadPoolExecutor(NUMBER_OF_CORES, NUMBER_OF_CORES * 2, KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, mTaskQueue, new BackgroundThreadFactory());
     }
 
     public static CustomThreadPoolManager getsInstance() {
@@ -48,6 +48,11 @@ public class CustomThreadPoolManager {
 
     public void addCallableMethod(Callable callable){
         Future future = mExecutorService.submit(callable);
+        mRunningTaskList.add(future);
+    }
+
+    public void addRunnableMethod(Runnable runnable){
+        Future future = mExecutorService.submit(runnable);
         mRunningTaskList.add(future);
     }
 
