@@ -4,6 +4,7 @@
         <rotate android:pivotX="50%"
             android:pivotY="50%">
             <shape>
+                <corners android:radius="30dp"/>
                 <gradient
                     android:angle="180"
                     android:startColor="#670066"
