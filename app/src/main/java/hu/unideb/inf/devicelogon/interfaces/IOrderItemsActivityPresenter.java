@@ -7,4 +7,5 @@ public interface IOrderItemsActivityPresenter {
     void initOrderItemsView();
     void createOrderItemsViewAdapter();
     void sendAdapterToView(OrderItemsViewHolderAdapter adapter);
+    void refreshAdapter();
 }

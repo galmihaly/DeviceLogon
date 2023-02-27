@@ -1,6 +1,5 @@
 package hu.unideb.inf.devicelogon;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
@@ -8,12 +7,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import hu.unideb.inf.devicelogon.adapters.FragmentPagerAdapter;
 import hu.unideb.inf.devicelogon.listeners.LoginButtonListener;
@@ -36,8 +31,8 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private ImageButton loginBarcodeButton;
     private ConstraintLayout activityCL;
 
-    private ViewPager2 loginModesCL1;
-    private ViewPager2 loginModesCL2;
+    private ViewPager2 loginModesCL_portrait;
+    private ViewPager2 loginModesCL_landscape;
 
     private WindowSizeClass[] windowSizeClasses;
 
@@ -46,10 +41,10 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private FragmentPagerAdapter fragmentPagerAdapter;
     private ViewPagerListener viewPagerListener = ViewPagerListener.getInstance();
 
-    private LoginButtonListener loginButtonListener1 = new LoginButtonListener();
-    private LoginButtonListener loginButtonListener2 = new LoginButtonListener();
-    private LoginButtonListener loginButtonListener3 = new LoginButtonListener();
-    private LoginButtonListener loginButtonListener4 = new LoginButtonListener();
+    private LoginButtonListener userPassLogButListener = new LoginButtonListener();
+    private LoginButtonListener pinCodeLogButListener = new LoginButtonListener();
+    private LoginButtonListener rfidLogButListener = new LoginButtonListener();
+    private LoginButtonListener barcodeLogButListener = new LoginButtonListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +65,6 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     }
 
     @Override
-    public void loadOtherActivityPages(Intent intent) {
-        if(intent == null) return;
-        startActivity(intent);
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
 
@@ -86,40 +75,40 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             });
         }
 
-        if(loginModesCL1 != null) { loginModesCL1.registerOnPageChangeCallback(viewPagerListener); }
-        if(loginModesCL2 != null) { loginModesCL2.registerOnPageChangeCallback(viewPagerListener); }
+        if(loginModesCL_portrait != null) { loginModesCL_portrait.registerOnPageChangeCallback(viewPagerListener); }
+        if(loginModesCL_landscape != null) { loginModesCL_landscape.registerOnPageChangeCallback(viewPagerListener); }
 
         if(loginAccAndPassButton != null){
-            if(loginModesCL1 != null) loginButtonListener1.setViewPager(loginModesCL1);
-            if(loginModesCL2 != null) loginButtonListener1.setViewPager(loginModesCL2);
-            loginButtonListener1.setFragmentPagerAdapter(fragmentPagerAdapter);
-            loginButtonListener1.setfT(FragmentTypes.USERPASSFRAGMENT);
+            if(loginModesCL_portrait != null) userPassLogButListener.setViewPager(loginModesCL_portrait);
+            if(loginModesCL_landscape != null) userPassLogButListener.setViewPager(loginModesCL_landscape);
+            userPassLogButListener.setFragmentPagerAdapter(fragmentPagerAdapter);
+            userPassLogButListener.setfT(FragmentTypes.USERPASSFRAGMENT);
 
-            loginAccAndPassButton.setOnClickListener(loginButtonListener1);
+            loginAccAndPassButton.setOnClickListener(userPassLogButListener);
         }
         if(loginPinButton != null){
-            if(loginModesCL1 != null) loginButtonListener2.setViewPager(loginModesCL1);
-            if(loginModesCL2 != null) loginButtonListener2.setViewPager(loginModesCL2);
-            loginButtonListener2.setFragmentPagerAdapter(fragmentPagerAdapter);
-            loginButtonListener2.setfT(FragmentTypes.PINCODEFRAGMENT);
+            if(loginModesCL_portrait != null) pinCodeLogButListener.setViewPager(loginModesCL_portrait);
+            if(loginModesCL_landscape != null) pinCodeLogButListener.setViewPager(loginModesCL_landscape);
+            pinCodeLogButListener.setFragmentPagerAdapter(fragmentPagerAdapter);
+            pinCodeLogButListener.setfT(FragmentTypes.PINCODEFRAGMENT);
 
-            loginPinButton.setOnClickListener(loginButtonListener2);
+            loginPinButton.setOnClickListener(pinCodeLogButListener);
         }
         if(loginRFIDButton != null){
-            if(loginModesCL1 != null) loginButtonListener3.setViewPager(loginModesCL1);
-            if(loginModesCL2 != null) loginButtonListener3.setViewPager(loginModesCL2);
-            loginButtonListener3.setFragmentPagerAdapter(fragmentPagerAdapter);
-            loginButtonListener3.setfT(FragmentTypes.RFIDFRAGMENT);
+            if(loginModesCL_portrait != null) rfidLogButListener.setViewPager(loginModesCL_portrait);
+            if(loginModesCL_landscape != null) rfidLogButListener.setViewPager(loginModesCL_landscape);
+            rfidLogButListener.setFragmentPagerAdapter(fragmentPagerAdapter);
+            rfidLogButListener.setfT(FragmentTypes.RFIDFRAGMENT);
 
-            loginRFIDButton.setOnClickListener(loginButtonListener3);
+            loginRFIDButton.setOnClickListener(rfidLogButListener);
         }
         if(loginBarcodeButton != null){
-            if(loginModesCL1 != null) loginButtonListener4.setViewPager(loginModesCL1);
-            if(loginModesCL2 != null) loginButtonListener4.setViewPager(loginModesCL2);
-            loginButtonListener4.setFragmentPagerAdapter(fragmentPagerAdapter);
-            loginButtonListener4.setfT(FragmentTypes.BARCODEFRAGMENT);
+            if(loginModesCL_portrait != null) barcodeLogButListener.setViewPager(loginModesCL_portrait);
+            if(loginModesCL_landscape != null) barcodeLogButListener.setViewPager(loginModesCL_landscape);
+            barcodeLogButListener.setFragmentPagerAdapter(fragmentPagerAdapter);
+            barcodeLogButListener.setfT(FragmentTypes.BARCODEFRAGMENT);
 
-            loginBarcodeButton.setOnClickListener(loginButtonListener4);
+            loginBarcodeButton.setOnClickListener(barcodeLogButListener);
         }
     }
 
@@ -135,10 +124,16 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             fragmentPagerAdapter.addItemToHashMap(fragmentTypes, baseFragment);
 
             if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
-               if(loginModesCL1 != null)  loginModesCL1.setAdapter(fragmentPagerAdapter);
-               if(loginModesCL2 != null)  loginModesCL2.setAdapter(fragmentPagerAdapter);
+               if(loginModesCL_portrait != null)  loginModesCL_portrait.setAdapter(fragmentPagerAdapter);
+               if(loginModesCL_landscape != null)  loginModesCL_landscape.setAdapter(fragmentPagerAdapter);
             }
         }
+    }
+
+    @Override
+    public void loadOtherActivityPages(Intent intent) {
+        if(intent == null) return;
+        startActivity(intent);
     }
 
     @Override
@@ -187,8 +182,8 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
                 setContentView(R.layout.activity_main_mobile_portrait);
                 setTheme(R.style.DeviceLogon_portrait);
-                llay = findViewById(R.id.cl_mobile_portrait);
-                loginModesCL1 = findViewById(R.id.loginModesCL1_mobile_portrait);
+                llay = findViewById(R.id.logButtonsCL_mobile_portrait);
+                loginModesCL_portrait = findViewById(R.id.loginModesCL1_mobile_portrait);
                 activityCL = findViewById(R.id.activityCL_mobile_portrait);
             }
         }
@@ -198,8 +193,8 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
                 setContentView(R.layout.activity_main_mobile_landscape);
                 setTheme(R.style.DeviceLogon_landscape);
-                llay = findViewById(R.id.cl2_mobile_landscape);
-                loginModesCL2 = findViewById(R.id.loginModesCL2_mobile_landscape);
+                llay = findViewById(R.id.logButtonsCL_mobile_landscape);
+                loginModesCL_landscape = findViewById(R.id.loginModesCL2_mobile_landscape);
                 activityCL = findViewById(R.id.activityCL_mobile_landscape);
             }
         }
@@ -208,8 +203,8 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
                 setContentView(R.layout.activity_main_tablet_landscape);
                 setTheme(R.style.DeviceLogon_landscape);
-                llay = findViewById(R.id.cl2_tablet_landscape);
-                loginModesCL2 = findViewById(R.id.loginModesCL2_tablet_landscape);
+                llay = findViewById(R.id.logButtonsCL_tablet_landscape);
+                loginModesCL_landscape = findViewById(R.id.loginModesCL2_tablet_landscape);
                 activityCL = findViewById(R.id.activityCL_tablet_landscape);
             }
         }
@@ -218,8 +213,8 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             setContentView(R.layout.activity_main_pda_portrait);
             setTheme(R.style.DeviceLogon_portrait);
 
-            llay = findViewById(R.id.cl_pda_portrait);
-            loginModesCL1 = findViewById(R.id.loginModesCL1_pda_portrait);
+            llay = findViewById(R.id.logButtonsCL_pda_portrait);
+            loginModesCL_portrait = findViewById(R.id.loginModesCL1_pda_portrait);
             activityCL = findViewById(R.id.activityCL_pda_portrait);
 
             Util.hideNavigationBar(this);

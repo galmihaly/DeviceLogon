@@ -21,14 +21,20 @@ public class OrderItemsActivityView extends AppCompatActivity implements IOrderI
     private RecyclerView recyclerView;
     private OrderItemsActivityPresenter orderItemsActivityPresenter;
 
-    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
 
         orderItemsActivityPresenter = new OrderItemsActivityPresenter(this, getApplicationContext(), wsc);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         orderItemsActivityPresenter.initOrderItemsView();
+        orderItemsActivityPresenter.refreshAdapter();
     }
 
     private void initView(){
@@ -84,6 +90,7 @@ public class OrderItemsActivityView extends AppCompatActivity implements IOrderI
 
         if(recyclerView != null){
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            adapter.refreshAdapter();
             recyclerView.setAdapter(adapter);
         }
     }

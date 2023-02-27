@@ -21,7 +21,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5_mobile_portrait">
 
             <Button
-                android:id="@+id/loginButton3_mobile_portrait"
+                android:id="@+id/pincodeLogBut_mobile_portrait"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"

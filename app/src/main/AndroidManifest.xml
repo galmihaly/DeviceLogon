@@ -16,6 +16,9 @@
         android:theme="@style/DeviceLogon"
         tools:targetApi="31">
         <activity
+            android:name=".WorkFlowActivityView"
+            android:exported="false" />
+        <activity
             android:name=".OrderItemsActivityView"
             android:exported="false" />
         <activity

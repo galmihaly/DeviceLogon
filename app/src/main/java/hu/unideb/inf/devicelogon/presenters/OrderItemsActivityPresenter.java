@@ -32,6 +32,8 @@ public class OrderItemsActivityPresenter implements IOrderItemsActivityPresenter
     private OrderItemsActivityHandler mOrderItemsActivityHandler;
     private WindowSizeClass[] wsc;
 
+    private OrderItemsViewHolderAdapter orderItemsViewHolderAdapter;
+
     public OrderItemsActivityPresenter(IOrderItemsActivityView iOrderItemsActivityView, Context context, WindowSizeClass[] wsc) {
         this.iOrderItemsActivityView = iOrderItemsActivityView;
         this.context = context;
@@ -78,7 +80,14 @@ public class OrderItemsActivityPresenter implements IOrderItemsActivityPresenter
 
     @Override
     public void sendAdapterToView(OrderItemsViewHolderAdapter adapter) {
+        orderItemsViewHolderAdapter = adapter;
         iOrderItemsActivityView.bindAdapterToView(adapter);
+    }
+
+    @Override
+    public void refreshAdapter() {
+        if(orderItemsViewHolderAdapter == null) return;
+        orderItemsViewHolderAdapter.refreshAdapter();
     }
 
     @Override

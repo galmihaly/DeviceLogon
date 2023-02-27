@@ -2,11 +2,12 @@ package hu.unideb.inf.devicelogon.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,14 +18,15 @@ import java.util.List;
 
 import hu.unideb.inf.devicelogon.R;
 import hu.unideb.inf.devicelogon.adapters.models.OrderItem;
-import hu.unideb.inf.devicelogon.enums.OrderItemViewType;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
+import hu.unideb.inf.devicelogon.listeners.OrderItemButtonListener;
 
 public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private WindowSizeClass[] windowSizeClasses;
     private List<OrderItem> orderItemList;
+    private OrderItem viewOrderItem;
 
     private int selectedPosition = -1;
 
@@ -99,7 +101,6 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
 
                     if(v == null) return null;
                     return new OrderItemsViewHolder(v);
-
                 }
                 case OrderItem.TYPE2:{
                     v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
@@ -113,7 +114,7 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
         return null;
     }
 
-    @SuppressLint({"RecyclerView", "NotifyDataSetChanged"})
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         OrderItem orderItem = orderItemList.get(position);
@@ -132,7 +133,7 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
 
                         if (currentSelected != -1) {
                             orderItemList.get(currentSelected).setType(OrderItem.TYPE1);
-                            notifyItemChanged(currentSelected);// Deselected the previous item.
+                            notifyItemChanged(currentSelected);
                         }
                         orderItem.setType(OrderItem.TYPE2);
                         notifyItemChanged(selectedPosition);
@@ -143,10 +144,17 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
                 case OrderItem.TYPE2:{
                     ((OrderItemsViewHolder2)holder).getTextView().setText(orderItem.getText1());
                     ((OrderItemsViewHolder2)holder).getTextView2().setText(orderItem.getText2());
+                    viewOrderItem = orderItem;
+                    ((OrderItemsViewHolder2)holder).initButtonListener();
                     break;
                 }
             }
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void refreshAdapter(){
+        notifyDataSetChanged();
     }
 
     @Override
@@ -169,12 +177,14 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
         return orderItemList.size();
     }
 
+    public OrderItem getOrderItem(){
+        return viewOrderItem;
+    }
+
     public class OrderItemsViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textView;
         private ConstraintLayout cl;
-
-        private int selectedPosition;
 
         public OrderItemsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -199,22 +209,29 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
         private TextView textView2;
         private ConstraintLayout cl2;
 
-        private int selectedPosition;
+        private ImageButton orderItem2But;
+        private OrderItemButtonListener orderItemButtonListener;
 
         public OrderItemsViewHolder2(@NonNull View itemView) {
             super(itemView);
 
-            this.textView = itemView.findViewById(R.id.orderItem3);
+            this.textView = itemView.findViewById(R.id.orderItem1);
             this.textView2 = itemView.findViewById(R.id.orderItem2);
             cl2 = itemView.findViewById(R.id.cl3);
+            orderItem2But = itemView.findViewById(R.id.orderItem2viewButton);
+        }
+
+        public void initButtonListener(){
+            orderItemButtonListener = OrderItemButtonListener.getInstance();
+            orderItemButtonListener.setOrderItem(getOrderItem());
+            orderItemButtonListener.setContext(context.getApplicationContext());
+            orderItem2But.setOnClickListener(orderItemButtonListener);
         }
 
         public TextView getTextView() {
             return textView;
         }
 
-        public TextView getTextView2() {
-            return textView2;
-        }
+        public TextView getTextView2() { return textView2; }
     }
 }

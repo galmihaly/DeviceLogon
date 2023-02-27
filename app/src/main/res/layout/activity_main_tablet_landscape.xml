@@ -70,7 +70,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <LinearLayout
-                    android:id="@+id/cl2_tablet_landscape"
+                    android:id="@+id/logButtonsCL_tablet_landscape"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

@@ -1,8 +1,10 @@
 package hu.unideb.inf.devicelogon.adapters.models;
 
+import java.io.Serializable;
+
 import hu.unideb.inf.devicelogon.enums.OrderItemViewType;
 
-public class OrderItem {
+public class OrderItem implements Serializable {
 
     public static final int TYPE1 = 0;
     public static final int TYPE2 = 1;
