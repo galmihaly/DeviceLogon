@@ -149,26 +149,6 @@ public class LoginFragment extends BaseFragment implements ILoginFragment {
 
         loginFragmentPresenter = new LoginFragmentPresenter(this, getContext().getApplicationContext(), wsc);
 
-
-
-//        int orientation = getResources().getConfiguration().orientation;
-//
-//        if(orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            view = inflater.inflate(R.layout.fragment_barcode_mobile_portrait, container, false);
-//            button = view.findViewById(R.id.loginButton4_mobile_portrait);
-//        }
-//        else if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-//            view = inflater.inflate(R.layout.fragment_barcode_mobile_landscape, container, false);
-//            button = view.findViewById(R.id.loginButton4_mobile_landscape);
-//        }
-//
-//        wsc[0]  = (WindowSizeClass) getArguments().getSerializable("windowHeightEnum");
-//        wsc[1] =  (WindowSizeClass) getArguments().getSerializable("windowWidthEnum");
-//
-//        Log.e("height", String.valueOf(wsc[0]));
-//        Log.e("width", String.valueOf(wsc[1]));
-
-
         return view;
     }
 
