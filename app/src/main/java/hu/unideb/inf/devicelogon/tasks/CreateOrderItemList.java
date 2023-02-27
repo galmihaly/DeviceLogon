@@ -2,6 +2,7 @@ package hu.unideb.inf.devicelogon.tasks;
 
 import android.content.Context;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -29,7 +30,7 @@ public class CreateOrderItemList implements Runnable {
     private Message message;
 
     public CreateOrderItemList(Context context, WindowSizeClass[] wsc) {
-        this.context = context;
+        this.context = context.getApplicationContext();
         this.wsc = wsc;
     }
 
@@ -59,7 +60,7 @@ public class CreateOrderItemList implements Runnable {
             orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"cím15", "alcím15"));
             orderItemArrayList.add(new OrderItem(OrderItem.TYPE1,"cím16", "alcím16"));
 
-            orderItemAdapter = new OrderItemsViewHolderAdapter(context.getApplicationContext(), wsc, orderItemArrayList);
+            orderItemAdapter = new OrderItemsViewHolderAdapter(context, wsc, orderItemArrayList);
 
             message = Util.createMessage(Util.ADAPTER_CREATED_SUCCES, "Az Adapterhez szükséges elemek elkészültek!");
             message.obj = orderItemAdapter;

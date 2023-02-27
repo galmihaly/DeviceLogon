@@ -3,7 +3,6 @@ package hu.unideb.inf.devicelogon.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import hu.unideb.inf.devicelogon.R;
+import hu.unideb.inf.devicelogon.WorkFlowActivityView;
 import hu.unideb.inf.devicelogon.adapters.models.OrderItem;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.listeners.OrderItemButtonListener;
@@ -24,16 +24,20 @@ import hu.unideb.inf.devicelogon.listeners.OrderItemButtonListener;
 public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private WindowSizeClass[] windowSizeClasses;
+    private WindowSizeClass[] wsc;
     private List<OrderItem> orderItemList;
     private OrderItem viewOrderItem;
 
     private int selectedPosition = -1;
 
-    public OrderItemsViewHolderAdapter(Context context, WindowSizeClass[] windowSizeClasses, List<OrderItem> orderItemList) {
-        this.context = context;
-        this.windowSizeClasses = windowSizeClasses;
+    public OrderItemsViewHolderAdapter(Context context, WindowSizeClass[] wsc, List<OrderItem> orderItemList) {
+        this.context = context.getApplicationContext();
+        this.wsc = wsc;
         this.orderItemList = orderItemList;
+    }
+
+    public Context getContext() {
+        return context.getApplicationContext();
     }
 
     @NonNull
@@ -42,74 +46,87 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
 
         View v = null;
 
-        if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-            switch (viewType){
-                case OrderItem.TYPE1:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
+        switch (viewType){
+            case OrderItem.TYPE1:{
+                v = LayoutInflater.from(context).inflate(R.layout.orderitem_layout, parent, false);
+                return new OrderItemsViewHolder(v);
 
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder(v);
-
-                }
-                case OrderItem.TYPE2:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
-
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder2(v);
-                }
+            }
+            case OrderItem.TYPE2:{
+                v = LayoutInflater.from(context).inflate(R.layout.orderitem_layout2, parent, false);
+                return new OrderItemsViewHolder2(v);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
-            switch (viewType){
-                case OrderItem.TYPE1:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
 
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder(v);
 
-                }
-                case OrderItem.TYPE2:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
-
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder2(v);
-                }
-            }
-        }
-        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
-            switch (viewType){
-                case OrderItem.TYPE1:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
-
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder(v);
-
-                }
-                case OrderItem.TYPE2:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
-
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder2(v);
-                }
-            }
-        }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
-
-            switch (viewType){
-                case OrderItem.TYPE1:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
-
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder(v);
-                }
-                case OrderItem.TYPE2:{
-                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
-
-                    if(v == null) return null;
-                    return new OrderItemsViewHolder2(v);
-                }
-            }
-        }
+//        if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+//            switch (viewType){
+//                case OrderItem.TYPE1:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder(v);
+//
+//                }
+//                case OrderItem.TYPE2:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder2(v);
+//                }
+//            }
+//        }
+//        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+//            switch (viewType){
+//                case OrderItem.TYPE1:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder(v);
+//
+//                }
+//                case OrderItem.TYPE2:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder2(v);
+//                }
+//            }
+//        }
+//        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+//            switch (viewType){
+//                case OrderItem.TYPE1:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder(v);
+//
+//                }
+//                case OrderItem.TYPE2:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder2(v);
+//                }
+//            }
+//        }
+//        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+//
+//            switch (viewType){
+//                case OrderItem.TYPE1:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder(v);
+//                }
+//                case OrderItem.TYPE2:{
+//                    v = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.orderitem_layout2, parent, false);
+//
+//                    if(v == null) return null;
+//                    return new OrderItemsViewHolder2(v);
+//                }
+//            }
+//        }
 
         return null;
     }
@@ -145,6 +162,7 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
                     ((OrderItemsViewHolder2)holder).getTextView().setText(orderItem.getText1());
                     ((OrderItemsViewHolder2)holder).getTextView2().setText(orderItem.getText2());
                     viewOrderItem = orderItem;
+
                     ((OrderItemsViewHolder2)holder).initButtonListener();
                     break;
                 }
@@ -190,8 +208,7 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
             super(itemView);
 
             this.textView = itemView.findViewById(R.id.orderItem1);
-            cl = itemView.findViewById(R.id.cl);
-
+            this.cl = itemView.findViewById(R.id.cl);
         }
 
         public TextView getTextView() {
@@ -208,6 +225,7 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
         private TextView textView;
         private TextView textView2;
         private ConstraintLayout cl2;
+        private Context con;
 
         private ImageButton orderItem2But;
         private OrderItemButtonListener orderItemButtonListener;
@@ -215,17 +233,23 @@ public class OrderItemsViewHolderAdapter extends RecyclerView.Adapter<RecyclerVi
         public OrderItemsViewHolder2(@NonNull View itemView) {
             super(itemView);
 
-            this.textView = itemView.findViewById(R.id.orderItem1);
-            this.textView2 = itemView.findViewById(R.id.orderItem2);
+            textView = itemView.findViewById(R.id.orderItem1);
+            textView2 = itemView.findViewById(R.id.orderItem2);
             cl2 = itemView.findViewById(R.id.cl3);
             orderItem2But = itemView.findViewById(R.id.orderItem2viewButton);
         }
 
         public void initButtonListener(){
+
+            con = getContext();
+
             orderItemButtonListener = OrderItemButtonListener.getInstance();
             orderItemButtonListener.setOrderItem(getOrderItem());
-            orderItemButtonListener.setContext(context.getApplicationContext());
-            orderItem2But.setOnClickListener(orderItemButtonListener);
+            orderItemButtonListener.setContext(con);
+
+            if(orderItem2But != null){
+                orderItem2But.setOnClickListener(orderItemButtonListener);
+            }
         }
 
         public TextView getTextView() {

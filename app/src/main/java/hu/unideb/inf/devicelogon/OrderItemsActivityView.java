@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 
 import hu.unideb.inf.devicelogon.adapters.OrderItemsViewHolderAdapter;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
@@ -33,8 +34,10 @@ public class OrderItemsActivityView extends AppCompatActivity implements IOrderI
     protected void onResume() {
         super.onResume();
 
-        orderItemsActivityPresenter.initOrderItemsView();
-        orderItemsActivityPresenter.refreshAdapter();
+        if(recyclerView != null){
+            orderItemsActivityPresenter.initOrderItemsView();
+            orderItemsActivityPresenter.refreshAdapter();
+        }
     }
 
     private void initView(){
@@ -90,7 +93,6 @@ public class OrderItemsActivityView extends AppCompatActivity implements IOrderI
 
         if(recyclerView != null){
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            adapter.refreshAdapter();
             recyclerView.setAdapter(adapter);
         }
     }

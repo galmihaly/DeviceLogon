@@ -1,5 +1,6 @@
 package hu.unideb.inf.devicelogon.listeners;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class OrderItemButtonListener implements View.OnClickListener {
     private Context context;
     private OrderItem orderItem;
 
+    @SuppressLint("StaticFieldLeak")
     private static OrderItemButtonListener mInstance;
 
     public static OrderItemButtonListener getInstance(){
@@ -36,10 +38,11 @@ public class OrderItemButtonListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent i = new Intent(context.getApplicationContext(), WorkFlowActivityView.class);
+        Intent i = new Intent(context, WorkFlowActivityView.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("orderItemType", orderItem.getType());
         i.putExtra("orderItemText1", orderItem.getText1());
         i.putExtra("orderItemText2", orderItem.getText2());
-        context.startActivity(i);
+        context.getApplicationContext().startActivity(i);
     }
 }

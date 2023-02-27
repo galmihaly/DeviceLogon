@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
@@ -36,7 +37,7 @@ public class OrderItemsActivityPresenter implements IOrderItemsActivityPresenter
 
     public OrderItemsActivityPresenter(IOrderItemsActivityView iOrderItemsActivityView, Context context, WindowSizeClass[] wsc) {
         this.iOrderItemsActivityView = iOrderItemsActivityView;
-        this.context = context;
+        this.context = context.getApplicationContext();
         this.wsc = wsc;
     }
 
@@ -67,7 +68,7 @@ public class OrderItemsActivityPresenter implements IOrderItemsActivityPresenter
         try {
             ApplicationLogger.logging(LogLevel.INFORMATION, "A rendelési lista adatait tartalmazó tároló létrehozása megkezdődött.");
 
-            CreateOrderItemList runnable = new CreateOrderItemList(context.getApplicationContext(), wsc);
+            CreateOrderItemList runnable = new CreateOrderItemList(context, wsc);
             runnable.setCustomThreadPoolManager(mCustomThreadPoolManager);
             mCustomThreadPoolManager.addRunnableMethod(runnable);
 
@@ -115,6 +116,11 @@ public class OrderItemsActivityPresenter implements IOrderItemsActivityPresenter
                     if(msg.obj instanceof OrderItemsViewHolderAdapter) {
                         iOrderItemsActivityPresenterWeakReference.get().sendAdapterToView((OrderItemsViewHolderAdapter) msg.obj);
                     }
+                    break;
+                }
+                case Util.ADAPTER_CREATED_FAILED:{
+                    Log.e("", "Nem sikerült!!!");
+                    break;
                 }
             }
         }
