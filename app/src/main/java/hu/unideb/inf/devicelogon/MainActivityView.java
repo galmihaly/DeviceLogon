@@ -19,6 +19,9 @@ import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.presenters.MainActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
+import leakcanary.AppWatcher;
+import leakcanary.LeakCanary;
+import leakcanary.ObjectWatcher;
 
 public class MainActivityView extends AppCompatActivity implements IMainActivityView {
 
@@ -124,10 +127,15 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             fragmentPagerAdapter.addItemToHashMap(fragmentTypes, baseFragment);
 
             if(fragmentPagerAdapter.getItemCount() == buttonsListSize){
-               if(loginModesCL_portrait != null)  loginModesCL_portrait.setAdapter(fragmentPagerAdapter);
-               if(loginModesCL_landscape != null)  loginModesCL_landscape.setAdapter(fragmentPagerAdapter);
+                if(loginModesCL_portrait != null)  loginModesCL_portrait.setAdapter(fragmentPagerAdapter);
+                if(loginModesCL_landscape != null)  loginModesCL_landscape.setAdapter(fragmentPagerAdapter);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -221,7 +229,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
             Util.hideActionBar(this);
         }
 
-        fragmentPagerAdapter = new FragmentPagerAdapter(this);
+        fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager(), getLifecycle());
         viewPagerListener.setFragmentPagerAdapter(fragmentPagerAdapter);
     }
 }

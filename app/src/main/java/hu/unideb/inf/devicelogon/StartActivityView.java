@@ -14,6 +14,8 @@ import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.interfaces.IStartActivityView;
 import hu.unideb.inf.devicelogon.presenters.StartActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
+import leakcanary.AppWatcher;
+import leakcanary.LeakCanary;
 
 public class StartActivityView extends AppCompatActivity implements IStartActivityView {
 
