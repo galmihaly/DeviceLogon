@@ -19,9 +19,6 @@ import hu.unideb.inf.devicelogon.fragments.BaseFragment;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.presenters.MainActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
-import leakcanary.AppWatcher;
-import leakcanary.LeakCanary;
-import leakcanary.ObjectWatcher;
 
 public class MainActivityView extends AppCompatActivity implements IMainActivityView {
 
@@ -204,6 +201,16 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 llay = findViewById(R.id.logButtonsCL_mobile_landscape);
                 loginModesCL_landscape = findViewById(R.id.loginModesCL2_mobile_landscape);
                 activityCL = findViewById(R.id.activityCL_mobile_landscape);
+            }
+        }
+        else if(windowSizeClasses[0] == WindowSizeClass.EXPANDED && windowSizeClasses[1] == WindowSizeClass.MEDIUM){
+            if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+                setContentView(R.layout.activity_main_tablet_portrait);
+                setTheme(R.style.DeviceLogon_portrait);
+                llay = findViewById(R.id.logButtonsCL_tablet_portrait);
+                loginModesCL_landscape = findViewById(R.id.loginModesCL1_tablet_portrait);
+                activityCL = findViewById(R.id.activityCL_tablet_portrait);
             }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){

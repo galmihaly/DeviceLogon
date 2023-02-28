@@ -62,6 +62,14 @@ public class OrderItemsActivityView extends AppCompatActivity implements IOrderI
                 recyclerView = findViewById(R.id.orderItemsList_mobile_landscape);
             }
         }
+        else if(wsc[0] == WindowSizeClass.EXPANDED && wsc[1] == WindowSizeClass.MEDIUM){
+            if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+                setContentView(R.layout.activity_orderitems_tablet_portrait);
+                setTheme(R.style.DeviceLogon_portrait);
+                recyclerView = findViewById(R.id.orderItemsList_tablet_portrait);
+            }
+        }
         else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 

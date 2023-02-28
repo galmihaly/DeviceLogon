@@ -60,6 +60,14 @@ public class WorkFlowActivityView extends AppCompatActivity {
                 orderItemTV = findViewById(R.id.orderItemTextView_mobile_landscape);
             }
         }
+        else if(wsc[0] == WindowSizeClass.EXPANDED && wsc[1] == WindowSizeClass.MEDIUM){
+            if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+                setContentView(R.layout.activity_workflow_tablet_portrait);
+                setTheme(R.style.DeviceLogon_portrait);
+                orderItemTV = findViewById(R.id.orderItemTextView_tablet_portrait);
+            }
+        }
         else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 

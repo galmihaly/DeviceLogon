@@ -14,8 +14,6 @@ import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
 import hu.unideb.inf.devicelogon.interfaces.IStartActivityView;
 import hu.unideb.inf.devicelogon.presenters.StartActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
-import leakcanary.AppWatcher;
-import leakcanary.LeakCanary;
 
 public class StartActivityView extends AppCompatActivity implements IStartActivityView {
 
@@ -36,8 +34,8 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
         super.onCreate(savedInstanceState);
         initView();
 
-        //startActivityPresenter = new StartActivityPresenter(this, getApplicationContext());
-        //startActivityPresenter.initTaskManager();
+        startActivityPresenter = new StartActivityPresenter(this, getApplicationContext());
+        startActivityPresenter.initTaskManager();
     }
 
     @Override
@@ -121,9 +119,9 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 setContentView(R.layout.startactivity_main_tablet_portrait);
                 setTheme(R.style.DeviceLogon_portrait);
 
-                startactivityCL = findViewById(R.id.programstartCL_tablet_landscape); //programstartCL_tablet_portrait
-                modesNumberLs = findViewById(R.id.modesNumber_tablet_landscape); //modesNumber_tablet_portrait
-                buttonLs = findViewById(R.id.startButton_tablet_landscape); // startButton_tablet_porrait
+                startactivityCL = findViewById(R.id.programstartCL_tablet_portrait); //programstartCL_tablet_portrait
+                modesNumberLs = findViewById(R.id.modesNumber_tablet_portrait); //modesNumber_tablet_portrait
+                buttonLs = findViewById(R.id.startButton_tablet_portrait); // startButton_tablet_porrait
             }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){

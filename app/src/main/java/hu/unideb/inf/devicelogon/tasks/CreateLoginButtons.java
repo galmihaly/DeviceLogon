@@ -150,6 +150,16 @@ public class CreateLoginButtons implements Callable {
                 imageUserPassId = R.drawable.ic_personalcard;
                 imageBarcodeId = R.drawable.ic_barcode;
             }
+            // tablet - portrait
+            else if(wsc[0] == WindowSizeClass.EXPANDED && wsc[1] == WindowSizeClass.MEDIUM){
+                margins = new int[] {30, 10, 30, 20};
+                width = 120;
+                height = 120;
+                imagePincodeId = R.drawable.ic_keyboard;
+                imageRFIDId = R.drawable.ic_rfid;
+                imageUserPassId = R.drawable.ic_personalcard;
+                imageBarcodeId = R.drawable.ic_barcode;
+            }
             // tablet - landscape
             else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
                 margins = new int[] {30, 10, 30, 10};

@@ -90,13 +90,42 @@ public class LoginFragment extends BaseFragment implements ILoginFragment {
                 }
             }
         }
+        else if(wsc[0] == WindowSizeClass.EXPANDED && wsc[1] == WindowSizeClass.MEDIUM){
+            if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+                if(fragType == FragmentTypes.USERPASSFRAGMENT){
+
+                    view = inflater.inflate(R.layout.fragment_user_and_password_tablet_portrait, container, false);
+                    button = view.findViewById(R.id.userpassLogBut_tablet_portrait);
+
+                }
+                else if(fragType == FragmentTypes.PINCODEFRAGMENT){
+
+                    view = inflater.inflate(R.layout.fragment_pincode_tablet_portrait, container, false);
+                    button = view.findViewById(R.id.pincodeLogBut_tablet_portrait);
+
+                }
+                else if(fragType == FragmentTypes.RFIDFRAGMENT){
+
+                    view = inflater.inflate(R.layout.fragment_rfid_tablet_portrait, container, false);
+                    button = view.findViewById(R.id.rfidLogBut_tablet_portrait);
+
+                }
+                else if(fragType == FragmentTypes.BARCODEFRAGMENT){
+
+                    view = inflater.inflate(R.layout.fragment_barcode_tablet_portrait, container, false);
+                    button = view.findViewById(R.id.barcodeLogBut_tablet_portrait);
+
+                }
+            }
+        }
         else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
                 if(fragType == FragmentTypes.USERPASSFRAGMENT){
 
                     view = inflater.inflate(R.layout.fragment_user_and_password_tablet_landscape, container, false);
-                    button = view.findViewById(R.id.userpassLogBut_tablet_portrait);
+                    button = view.findViewById(R.id.userpassLogBut_tablet_landscape);
 
                 }
                 else if(fragType == FragmentTypes.PINCODEFRAGMENT){
