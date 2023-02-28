@@ -36,8 +36,8 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
         super.onCreate(savedInstanceState);
         initView();
 
-        startActivityPresenter = new StartActivityPresenter(this, getApplicationContext());
-        startActivityPresenter.initTaskManager();
+        //startActivityPresenter = new StartActivityPresenter(this, getApplicationContext());
+        //startActivityPresenter.initTaskManager();
     }
 
     @Override
@@ -91,6 +91,8 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
         WindowSizeClass[] windowSizeClasses = Util.computeWindowSizeClasses(this);
         int orientation = this.getResources().getConfiguration().orientation;
 
+        Log.e("height-width", windowSizeClasses[0] + " " + windowSizeClasses[1]);
+
         if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
             if(orientation == Configuration.ORIENTATION_PORTRAIT){
 
@@ -111,6 +113,17 @@ public class StartActivityView extends AppCompatActivity implements IStartActivi
                 startactivityCL = findViewById(R.id.programstartCL_mobile_landscape);
                 modesNumberLs = findViewById(R.id.modesNumber_mobile_landscape);
                 buttonLs = findViewById(R.id.startButton_mobile_landscape);
+            }
+        }
+        else if(windowSizeClasses[0] == WindowSizeClass.EXPANDED && windowSizeClasses[1] == WindowSizeClass.MEDIUM){
+            if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+                setContentView(R.layout.startactivity_main_tablet_portrait);
+                setTheme(R.style.DeviceLogon_portrait);
+
+                startactivityCL = findViewById(R.id.programstartCL_tablet_landscape); //programstartCL_tablet_portrait
+                modesNumberLs = findViewById(R.id.modesNumber_tablet_landscape); //modesNumber_tablet_portrait
+                buttonLs = findViewById(R.id.startButton_tablet_landscape); // startButton_tablet_porrait
             }
         }
         else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
