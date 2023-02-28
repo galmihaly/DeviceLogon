@@ -64,6 +64,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         }
     }
 
+    // a button listenereket szintén át lehet rakni a presenterbe
     @Override
     protected void onResume() {
         super.onResume();
@@ -112,6 +113,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         }
     }
 
+    // át lehet rakni a presenterbe
     @Override
     public void loadOtherActivityFragment(FragmentTypes fragmentTypes, BaseFragment baseFragment) {
         if(baseFragment == null) return;
@@ -141,6 +143,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         startActivity(intent);
     }
 
+    // ezt át lehet rakni a presenterbe
     @Override
     public void setButtonToLayout(ImageButton imageButton) {
         if(llay == null) return;
