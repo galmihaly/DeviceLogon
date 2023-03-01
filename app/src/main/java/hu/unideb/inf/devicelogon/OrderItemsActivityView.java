@@ -12,11 +12,13 @@ import android.util.Log;
 
 import hu.unideb.inf.devicelogon.adapters.OrderItemsViewHolderAdapter;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
+import hu.unideb.inf.devicelogon.fragments.BaseFragment;
+import hu.unideb.inf.devicelogon.fragments.fragmentinterfaces.IDetailFragment;
 import hu.unideb.inf.devicelogon.interfaces.IOrderItemsActivityView;
 import hu.unideb.inf.devicelogon.presenters.OrderItemsActivityPresenter;
 import hu.unideb.inf.devicelogon.utils.Util;
 
-public class OrderItemsActivityView extends AppCompatActivity implements IOrderItemsActivityView {
+public class OrderItemsActivityView extends AppCompatActivity implements IOrderItemsActivityView, IDetailFragment.IOnItemClick {
 
     private WindowSizeClass[] wsc;
     private RecyclerView recyclerView;
@@ -27,7 +29,7 @@ public class OrderItemsActivityView extends AppCompatActivity implements IOrderI
         super.onCreate(savedInstanceState);
         initView();
 
-        orderItemsActivityPresenter = new OrderItemsActivityPresenter(this, getApplicationContext(), wsc);
+        orderItemsActivityPresenter = new OrderItemsActivityPresenter(this, getApplicationContext(), wsc, this);
     }
 
     @Override
@@ -103,5 +105,14 @@ public class OrderItemsActivityView extends AppCompatActivity implements IOrderI
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
         }
+    }
+
+//    IDetailFragment.IOnItemClick callback metódusa
+    @Override
+    public void sendFragmentToActivity(BaseFragment baseFragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.detailFragmentCL_tablet_landscape, baseFragment)
+                .commit();
     }
 }

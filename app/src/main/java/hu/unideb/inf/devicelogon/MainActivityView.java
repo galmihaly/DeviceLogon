@@ -34,12 +34,12 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
     private ViewPager2 loginModesCL_portrait;
     private ViewPager2 loginModesCL_landscape;
 
-    private WindowSizeClass[] windowSizeClasses;
+    private WindowSizeClass[] wsc;
 
     private int modesNumber;
     private int buttonsListSize;
     private FragmentPagerAdapter fragmentPagerAdapter;
-    private ViewPagerListener viewPagerListener = ViewPagerListener.getInstance();
+    private ViewPagerListener viewPagerListener;
 
     private LoginButtonListener userPassLogButListener = new LoginButtonListener();
     private LoginButtonListener pinCodeLogButListener = new LoginButtonListener();
@@ -51,8 +51,8 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         super.onCreate(savedInstanceState);
         initView();
 
-        if(windowSizeClasses != null) {
-            mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext(), windowSizeClasses);
+        if(wsc != null) {
+            mainActivityPresenter = new MainActivityPresenter(this, getApplicationContext(), wsc);
             mainActivityPresenter.initTaskManager();
         }
 
@@ -119,7 +119,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         if(baseFragment == null) return;
 
         baseFragment.atachPresenter(mainActivityPresenter);
-        Util.sendDisplaySizesToFragments(baseFragment, windowSizeClasses, fragmentTypes);
+        Util.sendDisplaySizesToFragments(baseFragment, wsc, fragmentTypes);
 
         if(fragmentPagerAdapter != null){
             fragmentPagerAdapter.addFragment(baseFragment);
@@ -182,10 +182,10 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
 
     private void initView(){
 
-        windowSizeClasses = Util.computeWindowSizeClasses(this);
+        wsc = Util.computeWindowSizeClasses(this);
         int orientation = this.getResources().getConfiguration().orientation;
 
-        if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+        if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.COMPACT){
             if(orientation == Configuration.ORIENTATION_PORTRAIT){
 
                 setContentView(R.layout.activity_main_mobile_portrait);
@@ -195,7 +195,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 activityCL = findViewById(R.id.activityCL_mobile_portrait);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+        else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.EXPANDED){
 
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
@@ -206,7 +206,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 activityCL = findViewById(R.id.activityCL_mobile_landscape);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.EXPANDED && windowSizeClasses[1] == WindowSizeClass.MEDIUM){
+        else if(wsc[0] == WindowSizeClass.EXPANDED && wsc[1] == WindowSizeClass.MEDIUM){
             if(orientation == Configuration.ORIENTATION_PORTRAIT) {
 
                 setContentView(R.layout.activity_main_tablet_portrait);
@@ -216,7 +216,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 activityCL = findViewById(R.id.activityCL_tablet_portrait);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.MEDIUM && windowSizeClasses[1] == WindowSizeClass.EXPANDED){
+        else if(wsc[0] == WindowSizeClass.MEDIUM && wsc[1] == WindowSizeClass.EXPANDED){
             if(orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
                 setContentView(R.layout.activity_main_tablet_landscape);
@@ -226,7 +226,7 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
                 activityCL = findViewById(R.id.activityCL_tablet_landscape);
             }
         }
-        else if(windowSizeClasses[0] == WindowSizeClass.COMPACT && windowSizeClasses[1] == WindowSizeClass.COMPACT){
+        else if(wsc[0] == WindowSizeClass.COMPACT && wsc[1] == WindowSizeClass.COMPACT){
 
             setContentView(R.layout.activity_main_pda_portrait);
             setTheme(R.style.DeviceLogon_portrait);
@@ -240,6 +240,6 @@ public class MainActivityView extends AppCompatActivity implements IMainActivity
         }
 
         fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager(), getLifecycle());
-        viewPagerListener.setFragmentPagerAdapter(fragmentPagerAdapter);
+        viewPagerListener = new ViewPagerListener(fragmentPagerAdapter);
     }
 }

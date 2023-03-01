@@ -2,35 +2,39 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl3"
+    android:id="@+id/cl3_selected"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@drawable/orderitem_selected_background">
 
     <TextView
-        android:id="@+id/orderItem1"
+        android:id="@+id/orderItem1_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:text="item"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/orderItem2"
+        android:id="@+id/orderItem2_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/orderItem1"
+        app:layout_constraintStart_toEndOf="@+id/orderItem1_selected"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/orderItem2viewButton"
+        android:id="@+id/orderItem2viewButton_selected"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="24dp"

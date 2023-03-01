@@ -85,7 +85,6 @@ public class MainActivityPresenter implements IMainActivityPresenter, PresenterT
 
     @Override
     public void addFragmentByEnum(FragmentTypes fragmentTypes) {
-
         iMainActivityView.loadOtherActivityFragment(fragmentTypes, new LoginFragment());
     }
 

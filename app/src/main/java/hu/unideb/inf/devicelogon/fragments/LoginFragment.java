@@ -37,7 +37,7 @@ public class LoginFragment extends BaseFragment implements ILoginFragment {
                 if(fragType == FragmentTypes.USERPASSFRAGMENT){
 
                     view = inflater.inflate(R.layout.fragment_user_and_password_mobile_portrait, container, false);
-                    button = view.findViewById(R.id.userpassLogBut_tablet_portrait);
+                    button = view.findViewById(R.id.userpassLogBut_mobile_portrait);
 
                 }
                 else if(fragType == FragmentTypes.PINCODEFRAGMENT){
@@ -67,7 +67,7 @@ public class LoginFragment extends BaseFragment implements ILoginFragment {
                 if(fragType == FragmentTypes.USERPASSFRAGMENT){
 
                     view = inflater.inflate(R.layout.fragment_user_and_password_mobile_landscape, container, false);
-                    button = view.findViewById(R.id.userpassLogBut_tablet_portrait);
+                    button = view.findViewById(R.id.userpassLogBut_mobile_landscape);
 
                 }
                 else if(fragType == FragmentTypes.PINCODEFRAGMENT){

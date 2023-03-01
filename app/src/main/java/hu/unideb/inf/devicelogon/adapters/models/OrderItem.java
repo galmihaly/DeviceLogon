@@ -6,8 +6,9 @@ import hu.unideb.inf.devicelogon.enums.OrderItemViewType;
 
 public class OrderItem implements Serializable {
 
-    public static final int TYPE1 = 0;
-    public static final int TYPE2 = 1;
+    public static final int ORDERITEM_BASE = 0;
+    public static final int ORDERITEM_SELECTED = 1;
+    public static final int ORDERITEM_SELECTED_TABLAND = 2;
 
     private int type;
     private String text1;

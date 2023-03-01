@@ -13,6 +13,7 @@ import java.lang.ref.WeakReference;
 import hu.unideb.inf.devicelogon.adapters.OrderItemsViewHolderAdapter;
 import hu.unideb.inf.devicelogon.enums.FragmentTypes;
 import hu.unideb.inf.devicelogon.enums.WindowSizeClass;
+import hu.unideb.inf.devicelogon.fragments.fragmentinterfaces.IDetailFragment;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityPresenter;
 import hu.unideb.inf.devicelogon.interfaces.IMainActivityView;
 import hu.unideb.inf.devicelogon.interfaces.IOrderItemsActivityPresenter;
@@ -29,16 +30,20 @@ public class OrderItemsActivityPresenter implements IOrderItemsActivityPresenter
 
     private IOrderItemsActivityView iOrderItemsActivityView;
     private Context context;
+    private WindowSizeClass[] wsc;
+    private IDetailFragment.IOnItemClick iOnItemClick;
+
     private CustomThreadPoolManager mCustomThreadPoolManager;
     private OrderItemsActivityHandler mOrderItemsActivityHandler;
-    private WindowSizeClass[] wsc;
+
 
     private OrderItemsViewHolderAdapter orderItemsViewHolderAdapter;
 
-    public OrderItemsActivityPresenter(IOrderItemsActivityView iOrderItemsActivityView, Context context, WindowSizeClass[] wsc) {
+    public OrderItemsActivityPresenter(IOrderItemsActivityView iOrderItemsActivityView, Context context, WindowSizeClass[] wsc, IDetailFragment.IOnItemClick iOnItemClick) {
         this.iOrderItemsActivityView = iOrderItemsActivityView;
-        this.context = context.getApplicationContext();
+        this.context = context;
         this.wsc = wsc;
+        this.iOnItemClick = iOnItemClick;
     }
 
     @Override
@@ -68,7 +73,7 @@ public class OrderItemsActivityPresenter implements IOrderItemsActivityPresenter
         try {
             ApplicationLogger.logging(LogLevel.INFORMATION, "A rendelési lista adatait tartalmazó tároló létrehozása megkezdődött.");
 
-            CreateOrderItemList runnable = new CreateOrderItemList(context, wsc);
+            CreateOrderItemList runnable = new CreateOrderItemList(context, wsc, iOnItemClick);
             runnable.setCustomThreadPoolManager(mCustomThreadPoolManager);
             mCustomThreadPoolManager.addRunnableMethod(runnable);
 
